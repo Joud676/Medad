@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قراءة الكتاب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/WriteStyles.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="../images/MedadWhite.png" alt="Medad Logo" width="50%">
+            </a>
+
+
+            <nav class="top-nav">
+                <ul>
+                    <li class="active"><a href="index.html">
+                            <i class="fas fa-home"></i> الصفحة الرئيسية</a></li>
+
+                    <li><a href="pages/about-us.html">
+                            <i class="fas fa-info-circle"></i>عن المنصة</a></li>
+
+                    <li><a href="pages/contact-us.html">
+                            <i class="fas fa-envelope"></i>اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <div class="chapter-management">
+                <h3 class="chapter-title">الفصول</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item active">
+                        <span>الفصل الأول</span>
+                    </li>
+                    <li class="chapter-item">
+                        <span>الفصل الثاني</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="book-container">
+                <div class="book">
+                    <div id="leftPage" class="page left">
+                        <div class="page-toolbar">
+                            <button type="button" id="boldLeft" title="نص عريض">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button type="button" id="italicLeft" title="نص مائل">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button type="button" id="underlineLeft" title="نص مسطر">
+                                <i class="fas fa-underline"></i>
+                            </button>
+                        </div>
+                        <div id="leftPageContent" class="page-content">
+                            بداية الكتاب...
+                        </div>
+                    </div>
+                    <div id="rightPage" class="page right">
+                        <div class="page-toolbar">
+                            <button type="button" id="boldRight" title="نص عريض">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button type="button" id="italicRight" title="نص مائل">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <button type="button" id="underlineRight" title="نص مسطر">
+                                <i class="fas fa-underline"></i>
+                            </button>
+                        </div>
+                        <div id="rightPageContent" class="page-content">
+                            تستمر القصة...
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button type="button" id="prevBtn" disabled title="الصفحة السابقة">الصفحة السابقة</button>
+                    <button type="button" id="nextBtn" title="الصفحة التالية">الصفحة التالية</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+
+                <ul>
+                    <li><a href="#home_section"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#book_section"><i class="fas fa-book"></i> الكتب</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا </h3>
+                <p> <i class="fas fa-envelope"></i> البريد الإلكتروني: medad@gmail.com</p>
+                <p><i class="fas fa-phone"></i> الهاتف: +966 508224252</p>
+
+            </div>
+            <div class="footer-section">
+                <h3>مداد </h3>
+                <p>مكتبة إلكترونية متكاملة لعشاق القراءة</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 مداد. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
