@@ -22,7 +22,7 @@ function drawBookCover() {
     ctx.globalCompositeOperation = 'source-over';
 
     if (uploadedImage.src) {
-        ctx.drawImage(uploadedImage, 20, 20, canvas.width - 40, canvas.height - 70);
+        ctx.drawImage(uploadedImage, 20, 20, canvas.width - 40, canvas.height - 90);
     }
 }
 
@@ -64,11 +64,33 @@ bookImageInput.addEventListener('change', function (event) {
     }
 });
 
-const saveButton = document.querySelector('#save-design');
-saveButton.addEventListener('click', () => {
-    const dataURL = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.href = dataURL;
-    link.download = 'book-cover.png';
-    link.click();
+
+const form = document.querySelector('form');
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    if (form.reportValidity()) {
+        showAlert('تمت إضافة الكتاب بنجاح!');
+        setTimeout(() => {
+            window.location.href = "WriteABook.html";
+        }, 5000);
+    }
+
 });
+
+function showAlert(message) {
+    const alert = document.createElement('div');
+    alert.classList.add('alert');
+
+    const alertContent = document.createElement('div');
+    alertContent.classList.add('alert-content');
+    alertContent.textContent = message;
+
+    alert.appendChild(alertContent);
+    document.body.appendChild(alert);
+
+    alert.addEventListener('click', () => {
+        document.body.removeChild(alert);
+    });
+}

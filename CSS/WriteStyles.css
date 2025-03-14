@@ -15,9 +15,12 @@ body {
     font-family: 'Tajawal', sans-serif;
 }
 
+h1 {
+    text-align: center;
+    padding: 10px;
+}
 
 main {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,29 +190,6 @@ button:disabled {
     justify-content: center;
 }
 
-footer {
-    background-color: #706999;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.footer-logo span {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.footer-description p {
-    margin: 10px 0;
-}
-
 .social-links {
     display: flex;
     justify-content: center;
@@ -227,12 +207,6 @@ footer {
     color: #e2ce6a;
 }
 
-.footer-bottom p {
-    margin: 0;
-    font-size: 14px;
-}
-
-/* Responsive Styles */
 @media (max-width: 992px) {
     .content-wrapper {
         flex-direction: column;
