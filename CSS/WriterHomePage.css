@@ -343,58 +343,7 @@ button:hover {
   box-shadow: 0 15px 25px rgba(52, 152, 219, 0.3);
 }
 
-
-/* Responsive part */
-@media (max-width: 768px) {
-
-  .challenge-card {
-    padding: 1.5rem;
-  }
-
-  .challenge-card h3 {
-    font-size: 1.5rem;
-  }
-
-  .challenge-card p {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .intro {
-    flex-direction: column;
-    text-align: center;
-    padding: 2rem 1rem;
-  }
-
-  .intro img {
-    max-width: 250px;
-    margin-bottom: 1.5rem;
-  }
-
-  .intro_Text {
-    padding: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-
-  .book-card img {
-    height: 150px;
-  }
-
-  .book-card p {
-    font-size: 0.6rem;
-    padding: 4px;
-  }
-}
-
-
-
-
 /* writer section */
-
-
 
 .top-writers {
   padding: 4rem 0rem;
@@ -468,7 +417,48 @@ button:hover {
   font-size: 1rem;
 }
 
+
+
+/* Responsive Design */
+
 @media (max-width: 768px) {
+
+  .challenge-card {
+    padding: 1.5rem;
+  }
+
+  .challenge-card h3 {
+    font-size: 1.5rem;
+  }
+
+  .challenge-card p {
+    font-size: 1rem;
+  }
+  
+  .intro {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .intro img {
+    max-width: 250px;
+    margin-bottom: 1.5rem;
+  }
+
+  .intro_Text {
+    padding: 1rem;
+  }
+
+  .book-card img {
+    height: 150px;
+  }
+
+  .book-card p {
+    font-size: 0.6rem;
+    padding: 4px;
+  }
+
   .writers-list {
     flex-direction: column;
     align-items: center;
@@ -477,5 +467,25 @@ button:hover {
   .writer-card {
     width: 90%;
     max-width: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .feature-grid {
+
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2%;
+    margin: 0% 2%;
+   }
+
+  .feature-card {
+    
+    flex-direction:column-reverse;
+    align-items:center;
+    text-align:center;
+  }
+
+  .feature-icon {
+    margin-bottom: 1rem;
   }
 }
