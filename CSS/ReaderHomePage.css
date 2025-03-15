@@ -436,9 +436,7 @@ button:hover {
   .challenge-card p {
     font-size: 1rem;
   }
-}
 
-@media (max-width: 768px) {
   .intro {
     flex-direction: column;
     text-align: center;
@@ -453,9 +451,7 @@ button:hover {
   .intro_Text {
     padding: 1rem;
   }
-}
 
-@media (max-width: 768px) {
   .book-list {
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 0.5rem;
@@ -470,3 +466,24 @@ button:hover {
     padding: 4px;
   }
 }
+
+@media (max-width: 576px) {
+  .feature-grid {
+
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2%;
+    margin: 0% 2%;
+   }
+
+  .feature-card {
+    
+    flex-direction:column-reverse;
+    align-items:center;
+    text-align:center;
+  }
+
+  .feature-icon {
+    margin-bottom: 1rem;
+  }
+}
+
