@@ -135,7 +135,7 @@ header {
 
 .top-nav li:not(.active) a:hover {
     color: #998cb0;
-    background-color: rgba(112, 105, 153, 0.05);
+    background-color: rgba(200, 198, 214, 0.982);
 }
 
 .top-nav i {
