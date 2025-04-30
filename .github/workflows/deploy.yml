@@ -1,4 +1,4 @@
-name: Inject Firebase Secrets and Deploy to Vercel 
+name: Inject Firebase Secrets and Deploy to Vercel
 
 on:
   push:
@@ -15,7 +15,6 @@ jobs:
 
       - name: 🔐 Inject Firebase config using envsubst
         run: |
-          mv public/JS/firebase-config.js public/JS/firebase-config.template.js
           envsubst < public/JS/firebase-config.template.js > public/JS/firebase-config.js
         env:
           APIKEY: ${{ secrets.APIKEY }}
