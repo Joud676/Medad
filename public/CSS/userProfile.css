@@ -1,0 +1,64 @@
+.profile-main {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.profile-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-container h2 {
+    color: #706999;
+    margin-bottom: 20px;
+}
+
+.profile-container p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.profile-actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-actions button {
+    padding: 10px;
+    border: none;
+    background-color: #706999;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.profile-actions button:hover {
+    background-color: #5e548a;
+}
+
+/* 👶 Kid Mode */
+body.kid-theme {
+    background: #f0fff4;
+}
+
+body.kid-theme .profile-container {
+    background: #d0f4f4;
+    color: #114;
+}
+
+body.kid-theme .profile-actions button {
+    background: #ffb347;
+}
+
+body.kid-theme .profile-actions button:hover {
+    background: #ff7f50;
+}

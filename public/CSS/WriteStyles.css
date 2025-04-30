@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+
+* {
+    font-family: 'Tajawal', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fcf9f6;
+    color: #333;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.content-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.chapter-management {
+    width: 200px;
+    background: #fcf9f6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: 546px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+}
+
+.chapter-title {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #706999;
+}
+
+.chapter-list {
+    list-style: none;
+    padding: 0;
+}
+
+.chapter-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: #ece6dc;
+    margin-bottom: 10px;
+}
+
+.chapter-item:hover {
+    background: #e2ce6a;
+}
+
+.chapter-item.active {
+    background: #afa1c7;
+    color: white;
+    font-weight: bold;
+}
+
+.chapter-item span {
+    flex: 1;
+    text-align: right;
+}
+
+.delete-icon {
+    border: none;
+    background: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: left;
+    align-self: left;
+}
+
+.delete-icon:hover {
+    color: #bb5e59;
+}
+
+.book-container {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.book {
+    width: 100%;
+    height: 500px;
+    background: #fcf9f6;
+    border: 2px solid #ece6dc;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    display: flex;
+    position: relative;
+}
+
+.page {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fcf9f6;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.page.left {
+    border-right: 1px solid #ece6dc;
+}
+
+.page.right {
+    border-left: 1px solid #ece6dc;
+}
+
+.page-toolbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px 0;
+    background: #ece6dc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.page-toolbar label {
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+}
+
+.page-toolbar button {
+    padding: 5px 10px;
+    border: none;
+    background: #afa1c7;
+    color: white;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.page-content {
+    width: 100%;
+    flex: 1;
+    border: none;
+    resize: none;
+    background: transparent;
+    direction: rtl;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.page-content:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+
+.page-content.small {
+    font-size: 14px;
+}
+
+.page-content.medium {
+    font-size: 18px;
+}
+
+.page-content.large {
+    font-size: 22px;
+}
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #706999;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #5e548a;
+    transform: translateY(-2px);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.delete-page-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+select#deletePageChoice {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    text-align: center;
+    appearance: none;
+    min-width: 200px;
+}
+
+.page-indicator {
+    text-align: center;
+    margin: 15px 0;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#title {
+    font-size: larger;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 25px;
+    text-align: center;
+
+}
+
+.chapter-actions {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chapter-actions button {
+    width: 160px;
+
+}
+
+#saveAllChaptersBtn {
+    margin: 10px;
+
+}
+
+
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .chapter-management {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 0 20px;
+        height: auto;
+        max-height: 300px;
+    }
+
+    .chapter-actions {
+        margin: 0 auto;
+    }
+
+    .book {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .page {
+        width: 100%;
+        height: 340px;
+    }
+
+    .page.left {
+        border-right: none;
+        border-bottom: 1px solid #ece6dc;
+    }
+
+    .page.right {
+        border-left: none;
+    }
+
+    .chapter-actions {
+        flex-direction: row;
+    }
+
+    .buttons {
+        width: 90px;
+        margin: 0 auto;
+    }
+
+    .flexBtn {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+}
+
+@media (max-width: 576px) {
+    .page {
+        height: 240px;
+        padding: 10px;
+    }
+
+    .buttons button {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .chapter-management {
+        height: auto;
+    }
+
+}
+
+.font-size-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #ece6dc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.font-size-toolbar label {
+    font-weight: bold;
+    color: #444;
+}
+
+.font-btn {
+    padding: 5px 12px;
+    font-size: 16px;
+    border: none;
+    background-color: #afa1c7;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}

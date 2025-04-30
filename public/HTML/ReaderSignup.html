@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب - مداد للقرّاء</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link rel="stylesheet" href="../CSS/LoginSignup.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="../images/MedadWhite.png" alt="Medad Logo" style="width: 50%;">
+            </a>
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="index.html">
+                            <i class="fas fa-home"></i> الصفحة الرئيسية</a></li>
+                    <li><a href="ReaderLogin.html">
+                            <i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="signup-section">
+            <div class="signup-container">
+                <h2>إنشاء حساب للقرّاء</h2>
+                <form id="readerSignupForm">
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">كلمة المرور</label>
+                        <input type="password" id="password" name="password" required minlength="6"
+                            placeholder="على الأقل 6 أحرف">
+                    </div>
+                    <button type="submit" class="signup-btn">إنشاء حساب</button>
+                </form>
+                <div id="status"></div>
+                <p class="login-link">لديك حساب بالفعل؟ <a href="ReaderLogin.html">تسجيل الدخول</a></p>
+            </div>
+        </section>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="#home_section"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="AboutUs.html"><i class="fas fa-address-card"></i> عن المنصة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا</h3>
+                <p><i class="fas fa-envelope"></i> البريد الإلكتروني: readers@medad.com</p>
+                <p><i class="fas fa-phone"></i> الهاتف: +966 508224252</p>
+            </div>
+            <div class="footer-section">
+                <h3>مداد للقرّاء</h3>
+                <p>منصة متكاملة لدعم القرّاء</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 مداد. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js"></script>
+    <script type="module" src="../JS/readerSignup.js"></script>
+</body>
+
+</html>

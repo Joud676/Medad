@@ -1,0 +1,111 @@
+body {
+    font-family: 'Tajawal', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #fcf9f6;
+    color: #333333;
+    text-align: right;
+}
+
+
+header h1 {
+    color: #FFFFFF;
+    text-align: center;
+    margin: 0;
+    font-size: 2em;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+.section-title {
+    background: linear-gradient(135deg, #afa1c7, #796a97);
+    color: #FFFFFF;
+    text-align: center;
+    margin: 30px auto 20px;
+    padding: 10px 20px;
+    font-size: 1.8em;
+    font-weight: 700;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1000px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.developer-images {
+    text-align: center;
+    margin: 20px auto;
+}
+
+.developer-images img {
+    max-width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #fcf9f6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+table th,
+table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #DDDDDD;
+}
+
+table th {
+    background: linear-gradient(135deg, #afa1c7, #796a97);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s ease;
+}
+
+.icon-link {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.icon-link a {
+    color: #796a97;
+    text-decoration: none;
+    font-size: 1.4em;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.icon-link a:hover {
+    transform: scale(1.2);
+    opacity: 0.8;
+}
+
+
+main {
+    padding-bottom: 80px;
+}

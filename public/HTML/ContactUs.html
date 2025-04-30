@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا</title>
+    <link rel="stylesheet" href="../CSS/ContactUS.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="../images/MedadWhite.png" alt="Medad Logo" style="width: 50%;">
+            </a>
+
+
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="index.html">
+                            <i class="fas fa-home"></i>الصفحة الرئيسية</a></li>
+
+                    <li><a href="AboutUs.html">
+                            <i class="fas fa-info-circle"></i>عن المنصة</a></li>
+
+                    <li class="active"><a href="ContactUs.html">
+                            <i class="fas fa-envelope"></i>اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="contact-form">
+            <h2>نموذج الاتصال</h2>
+            <form action="#" method="post">
+                <p>
+                    <label>الاسم الأول:</label>
+                    <input type="text" name="firstName" required placeholder="أدخل اسمك الأول">
+                </p>
+
+                <p>
+                    <label>الاسم الأخير:</label>
+                    <input type="text" name="lastName" required placeholder="أدخل اسمك الأخير">
+                </p>
+
+                <div class="form-group">
+                    <label>الجنس:</label>
+                    <div class="radio-group">
+                        <input type="radio" name="gender" value="male" id="male" required>
+                        <label for="male">ذكر</label>
+
+                        <input type="radio" name="gender" value="female" id="female" required>
+                        <label for="female">أنثى</label>
+                    </div>
+                </div>
+
+                <p>
+                    <label>رقم الجوال:</label>
+                    <input type="tel" name="mobile" required pattern="[0-9]{10}" placeholder="05XXXXXXXX">
+                </p>
+
+                <p>
+                    <label>تاريخ الميلاد:</label>
+                    <input title="date" type="date" name="dob" required>
+                </p>
+
+                <p>
+                    <label>البريد الإلكتروني:</label>
+                    <input title="email" type="email" name="email" required
+                        pattern="[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$" placeholder="example@email.com">
+                </p>
+
+                <p>
+                    <label>لغة التواصل:</label>
+                    <select title="language" name="language" required class="select">
+                        <option value="" disabled selected>اختر اللغة المناسبة</option>
+                        <option value="arabic">العربية</option>
+                        <option value="english">الإنجليزية</option>
+                        <option value="french">الفرنسية</option>
+                    </select>
+                </p>
+
+                <p>
+                    <label>رسالتك:</label>
+                    <textarea name="message" rows="6" required placeholder="اكتب رسالتك هنا ..."></textarea>
+                </p>
+
+                <p>
+                    <button type="submit">إرسال</button>
+                </p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+
+                <ul>
+                    <li><a href="#home_section"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#book_section"><i class="fas fa-book"></i> الكتب</a></li>
+                    <li><a href="AboutUs.html"><i class="fas fa-address-card"></i> عن المنصة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا </h3>
+                <p> <i class="fas fa-envelope"></i> البريد الإلكتروني: medad@gmail.com</p>
+                <p><i class="fas fa-phone"></i> الهاتف: +966 508224252</p>
+
+            </div>
+            <div class="footer-section">
+                <h3>مداد </h3>
+                <p>مكتبة إلكترونية متكاملة لعشاق القراءة</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 مداد. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    <script src="../JS/contactUs.js"></script>
+</body>
+
+</html>

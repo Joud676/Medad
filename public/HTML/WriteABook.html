@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كتابة الكتاب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/WriteStyles.css">
+    <link rel="stylesheet" href="../CSS/index.css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="../images/MedadWhite.png" alt="Medad Logo" style="width: 50%;">
+            </a>
+
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="WriterHomePage.html">
+                            <i class="fas fa-home"></i>الصفحة الرئيسية</a></li>
+
+                    <li><a href="writer-profile.html">
+                            <i class="fas fa-user"></i>ملفي الشخصي</a></li>
+
+                    <li class="active"><a href="WriteABook.html">
+                            <i class="fas fa-book-open"></i>انشر كتابك</a></li>
+
+                    <li><a href="ContactUs.html">
+                            <i class="fas fa-envelope"></i>اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <label id="title"></label>
+
+    <main>
+        <div class="content-wrapper">
+            <div class="chapter-management">
+                <h3 class="chapter-title">الفصول</h3>
+                <ul class="chapter-list">
+                    <li class="chapter-item active">
+                        <span>الفصل الأول</span>
+                    </li>
+                </ul>
+                <div class="chapter-actions">
+                    <button id="addChapterBtn" class="add-chapter">
+                        <i class="fas fa-plus"></i> إضافة فصل جديد
+                    </button>
+                    <button id="saveAllChaptersBtn"><i class="fas fa-save"></i> حفظ كل الفصول</button>
+                </div>
+            </div>
+
+            <div class="book-container">
+                <div class="page-toolbar">
+                    <label>حجم الخط:</label>
+                    <button type="button" class="font-btn" data-action="decrease">-</button>
+                    <button type="button" class="font-btn" data-action="increase">+</button>
+                </div>
+                <div class="book">
+
+                    <div id="rightPage" class="page right">
+
+
+                        <textarea id="rightPageContent" class="page-content" placeholder="اكتب هنا..."></textarea>
+                    </div>
+                    <div id="leftPage" class="page left">
+
+                        <textarea id="leftPageContent" class="page-content" placeholder="اكتب هنا..."></textarea>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin: 10px;">
+                    <span id="pageIndicator">صفحة 1 & 2</span>
+                </div>
+                <div class="delete-page-wrapper">
+                    <select id="deletePageChoice">
+                        <option disabled selected>اختر الصفحة للحذف</option>
+                        <option value="right">حذف الصفحة اليمنى</option>
+                        <option value="left">حذف الصفحة اليسرى</option>
+                        <option value="both">حذف الصفحتين</option>
+                    </select>
+                    <button id="confirmDeletePage" title="تنفيذ الحذف">
+                        <i class="fas fa-trash delete-icon"></i>
+                    </button>
+                </div>
+
+                <div class="buttons">
+                    <div class="flexBtn">
+                        <button id="prevBtn">الصفحة السابقة</button>
+                        <button id="saveBtn"><i class="fas fa-save"></i> حفظ</button>
+                        <button id="nextBtn">الصفحة التالية</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+
+                <ul>
+                    <li><a href="#home_section"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="#book_section"><i class="fas fa-book"></i> الكتب</a></li>
+                    <li><a href="AboutUs.html"><i class="fas fa-address-card"></i> عن المنصة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا </h3>
+                <p> <i class="fas fa-envelope"></i> البريد الإلكتروني: medad@gmail.com</p>
+                <p><i class="fas fa-phone"></i> الهاتف: +966 508224252</p>
+
+            </div>
+            <div class="footer-section">
+                <h3>مداد </h3>
+                <p>مكتبة إلكترونية متكاملة لعشاق القراءة</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 مداد. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script type="module" src="../JS/writeBook.js"></script>
+    <script type="module" src="../JS/firebase-config.js"></script>
+</body>
+
+</html>

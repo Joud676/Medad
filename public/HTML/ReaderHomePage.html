@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة مداد</title>
+    <link rel="stylesheet" href="../CSS/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../CSS/WriterHomePage.css">
+    <link rel="stylesheet" href="../css/ReaderHomePage.css">
+
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="../images/MedadWhite.png" alt="Medad Logo" width="50%">
+            </a>
+
+
+            <nav class="top-nav">
+                <ul>
+                    <li class="active"><a href="index.html">
+                            <i class="fas fa-home"></i>الصفحة الرئيسية</a></li>
+
+                    <li><a href="AboutUs.html">
+                            <i class="fas fa-info-circle"></i>عن المنصة</a></li>
+
+                    <li><a href="ContactUs.html">
+                            <i class="fas fa-envelope"></i>اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="intro" id="home_section">
+            <div>
+                <img src="../images/intro_PIc.png" alt="book picture">
+            </div>
+            <div class="intro_Text">
+                <h1>عالم القراءة</h1>
+                <h2>رحلة استكشاف بلا حدود</h2>
+                <p>اكتشف معنا متعة القراءة، حيث تصبح كل صفحة بوابة إلى عوالم جديدة، وكل كتاب رفيق درب يحملك إلى آفاق لم
+                    تكن تتخيلها من قبل.</p>
+                <blockquote>
+                    "الكتب هي التذاكر السحرية التي تنقلك إلى أي مكان دون أن تغادر مكانك"
+                </blockquote>
+                <a href="#searchtext" class="start-journey-btn">انطلق في رحلة المعرفة</a>
+            </div>
+        </section>
+
+
+        <section class="features">
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div>
+                        <h3>مكتبة شاملة</h3>
+                        <p> !كتب من مختلف التخصصات</p>
+                    </div>
+                    <div class="feature-icon">📚</div>
+                </div>
+
+                <div class="feature-card">
+                    <div>
+                        <h3>بحث متقدم</h3>
+                        <p>ابحث بالمؤلف، النوع، السنة</p>
+                    </div>
+
+                    <div class="feature-icon">🔍</div>
+                </div>
+
+                <div class="feature-card">
+                    <div>
+                        <h3>قراءة إلكترونية</h3>
+                        <p>اقرأ الكتب مباشرة عبر المتصفح</p>
+                    </div>
+                    <div class="feature-icon">📖</div>
+                </div>
+
+                <div class="feature-card">
+                    <div>
+                        <h3>متوافق مع الأجهزة</h3>
+                        <p>استمتع بالقراءة على أي جهاز</p>
+                    </div>
+
+                    <div class="feature-icon">📱</div>
+                </div>
+
+            </div>
+            <div class="Line"> </div>
+        </section>
+
+
+        <section class="search-bar">
+
+            <input id="searchtext" type="text" placeholder="ابحث عن  كتاب...">
+            <button id="search-btn" type="button"> بحث </button>
+            <div class="filter-dropdown">
+                <button id="filter" name="filter" type="button" class="filter-btn"> filter
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                    </svg>
+                </button>
+                <div class="filter-content">
+                    <div class="filter-section">
+                        <h4>السنة</h4>
+                        <select id="year" title="year">
+                            <option value=""> اختر السنة</option>
+
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+                            <option value="2025">2025</option>
+                        </select>
+                    </div>
+                    <div class="filter-section">
+                        <h4>التصنيف</h4>
+                        <select id="category" title="category">
+                            <option value="">اختر التصنيف</option>
+                            <option value="novel">روايات</option>
+                            <option value="nonfiction">كتب غير خيالية</option>
+                            <option value="poetry">شعر</option>
+                            <option value="short_story">قصة قصيرة</option>
+                            <option value="self_development">تطوير الذات</option>
+                            <option value="children">كتب أطفال</option>
+                            <option value="philosophy">كتب فلسفية</option>
+                            <option value="science">كتب علمية</option>
+                            <option value="technology">كتب تقنية</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div id="search_status" class="inline-status"></div>
+
+        <section class="section-books" id="user-library">
+            <h2>مكتبتي</h2>
+            <div class="book-list">
+                <!-- 
+                <div class="book-card">
+                    <img src="../images/artish.png" alt="ارتعش" onclick="window.location.href= 'ReadABook.html'">
+                    <p>محمد الناصر</p>
+                </div>
+
+                <div class="book-card">
+                    <img src="../images/alraahib.png" alt="الراهب">
+                    <p>سلسلة زياراء(4)</p>
+                </div>
+                <div class="book-card">
+                    <img src="../images/aleawsaj.png" alt="العوسج">
+                    <p>الجوهرة الرهال</p>
+                </div>
+                <div class="book-card">
+                    <img src="../images/alfadila.png" alt="الفضيلة">
+                    <p>اختيار الألوان</p>
+                </div>
+                <div class="book-card">
+                    <img src="../images/almakhbool.png" alt="المخبول">
+                    <p>سلسلة زياراء(3)</p>
+                </div>
+                <div class="book-card">
+                    <img src="../images/aldalafin.png" alt="جزيرة الدلافين">
+                    <p>سكوت أوديل</p>
+                </div>
+                <div class="book-card">
+                    <img src="../images/zawraqi.png" alt="زورقي الصغير">
+                    <p>ورد إيقاع الجاذب</p>
+                </div>
+                <div class="book-card">
+                    <img src="../images/alwahsh.png" alt="كتاب الوحش">
+                    <p>ايناس سمير</p>
+                </div> -->
+            </div>
+        </section>
+
+        <section class="section-books" id="general-library">
+            <h2>أضيفت مؤخرًا</h2>
+
+            <div class="book-list">
+                <!-- <div class="book-card">
+                    <img src="../images/alshaaeir.png" alt="الشاعر">
+                    <p>محمد الناصر </p>
+                </div>
+
+                <div class="book-card">
+                    <img src="../images/orange.png" alt=" شجرة البرتقال الرائعة">
+                    <p>محمد الناصر</p>
+                </div>
+
+                <div class="book-card">
+                    <img src="../images/adam.png" alt="متاهة ادم">
+                    <p>محمد الناصر</p>
+                </div>
+
+                <div class="book-card">
+                    <img src="../images/hawaa.png" alt="متاهة حواء">
+                    <p>محمد الناصر</p>
+                </div>
+
+                <div class="book-card">
+                    <img src="../images/alshams.png" alt="هيا نوقض الشمس">
+                    <p>محمد الناصر</p>
+                </div> -->
+            </div>
+        </section>
+
+
+        <section id="reading-challenges" class="reading-challenges">
+            <h2>تحديات القراءة</h2>
+            <div class="challenge-container">
+                <div class="challenge-card coming-soon">
+                    <h3> صوّت لقارئك المفضل</h3>
+                    <p>انضم لمجموعة القراءة وناقش الكتب</p>
+                    <button disabled> قريباً </button>
+                </div>
+
+                <div class="challenge-card coming-soon">
+                    <h3> تحدي الكتب</h3>
+                    <p>اقرأ 6 كتب لمؤلفين عرب هذا العام</p>
+                    <button disabled>قريباً</button>
+
+                </div>
+
+                <div class="challenge-card coming-soon">
+                    <h3>تحدي القراءة الشهري</h3>
+                    <p>اقرأ 5 كتب هذا الشهر واحصل على مكافأة</p>
+                    <button disabled>قريباً</button>
+                </div>
+            </div>
+        </section>
+
+        <footer class="site-footer">
+
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+
+                    <ul>
+                        <li><a href="#home_section"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="#book_section"><i class="fas fa-book"></i> الكتب</a></li>
+                        <li><a href="AboutUs.html"><i class="fas fa-address-card"></i> عن المنصة</a></li>
+
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا </h3>
+                    <p> <i class="fas fa-envelope"></i> البريد الإلكتروني: medad@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> الهاتف: +966 508224252</p>
+
+                </div>
+                <div class="footer-section">
+                    <h3>مداد للقراء</h3>
+                    <p>مكتبة إلكترونية متكاملة لعشاق القراءة</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 مداد. جميع الحقوق محفوظة.</p>
+            </div>
+        </footer>
+
+    </main>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+
+    <script src="../JS/firebase-config.js"></script>
+    <script src="../JS/ReaderHomePage.js"></script>
+
+
+
+</body>
+
+</html>
