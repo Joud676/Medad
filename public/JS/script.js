@@ -73,7 +73,7 @@ form.addEventListener('submit', (event) => {
     if (form.reportValidity()) {
         showAlert('تمت إضافة الكتاب بنجاح!');
         setTimeout(() => {
-            window.location.href = "/WriteABook.html";
+            window.location.href = "/HTML/WriteABook.html";
         }, 5000);
     }
 

@@ -45,7 +45,7 @@ document.getElementById('readerLoginForm').addEventListener('submit', function (
 
             // توجيه المستخدم بعد مهلة قصيرة
             setTimeout(() => {
-                window.location.href = "/ReaderHomePage.html";
+                window.location.href = "/HTML/ReaderHomePage.html";
             }, 2000);
         })
         .catch((error) => {

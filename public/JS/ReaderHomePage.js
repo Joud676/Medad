@@ -135,7 +135,7 @@ function createBookCard(book, bookId, showDeleteButton = false) {
 
   card.addEventListener("click", function () {
     localStorage.setItem("selectedBookId", bookId);
-    window.location.href = "/ReadABook.html";
+    window.location.href = "/HTML/ReadABook.html";
   });
 
   return card;

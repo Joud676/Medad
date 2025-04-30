@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             showSuccessAlert('تمت إضافة الكتاب بنجاح!', () => {
-                window.location.href = "/WriterHomePage.html";
+                window.location.href = "/HTML/WriterHomePage.html";
             });
 
         } catch (error) {

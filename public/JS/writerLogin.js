@@ -41,7 +41,7 @@ document.getElementById('writerLoginForm').addEventListener('submit', function (
             showStatus('تم تسجيل الدخول بنجاح! جاري التوجيه...');
 
             setTimeout(() => {
-                window.location.href = "/WriterHomePage.html";
+                window.location.href = "/HTML/WriterHomePage.html";
             }, 2000);
         })
         .catch((error) => {

@@ -30,7 +30,7 @@ function registerReader(email, password, fullName) {
       });
     })
     .then(() => {
-      window.location.href = "/ReaderHomePage.html";
+      window.location.href = "/HTML/ReaderHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في التسجيل: " + error.message);
@@ -52,7 +52,7 @@ function registerWriter(email, password, fullName) {
       });
     })
     .then(() => {
-      window.location.href = "/WriterHomePage.html";
+      window.location.href = "/HTML/WriterHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في التسجيل: " + error.message);
@@ -63,7 +63,7 @@ function registerWriter(email, password, fullName) {
 function loginReader(email, password) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      window.location.href = "/ReaderHomePage.html";
+      window.location.href = "/HTML/ReaderHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في تسجيل الدخول: " + error.message);
@@ -74,7 +74,7 @@ function loginReader(email, password) {
 function loginWriter(email, password) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      window.location.href = "/WriterHomePage.html";
+      window.location.href = "/HTML/WriterHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في تسجيل الدخول: " + error.message);

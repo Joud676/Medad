@@ -173,6 +173,6 @@ function showNoBooks(container) {
   container.style.minHeight = "310px";
   container.innerHTML = `
       <p style="font-size:1.5rem; color:#7f8c8d; margin-bottom:1rem;">لا يوجد لديك كتب حتى الآن.</p>
-      <a href="/AddBook.html" class="start-journey-btn">انشر كتابك الأول</a>
+      <a href="/HTML/AddBook.html" class="start-journey-btn">انشر كتابك الأول</a>
     `;
 }
