@@ -1,7 +1,18 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-import { app } from "./firebase-config.js";
 
+
+const firebaseConfig = {
+    apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
+    authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
+    projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
+    storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
+    messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
+    appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
+};
+
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 

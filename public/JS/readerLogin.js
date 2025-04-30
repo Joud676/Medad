@@ -1,10 +1,24 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { app } from "./firebase-config.js";
 
+
+const firebaseConfig = {
+    apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
+    authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
+    projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
+    storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
+    messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
+    appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
+};
+
+// تهيئة Firebase
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
+// عنصر عرض حالة تسجيل الدخول
 const statusDiv = document.getElementById('status');
 
+// دالة لعرض رسائل الحالة
 function showStatus(message, isError = false) {
     statusDiv.textContent = message;
     statusDiv.style.display = 'block';
@@ -28,6 +42,8 @@ document.getElementById('readerLoginForm').addEventListener('submit', function (
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             showStatus('تم تسجيل الدخول بنجاح! جاري التوجيه...');
+
+            // توجيه المستخدم بعد مهلة قصيرة
             setTimeout(() => {
                 window.location.href = "/HTML/ReaderHomePage.html";
             }, 2000);
