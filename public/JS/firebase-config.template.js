@@ -1,5 +1,5 @@
 
-const firebaseConfig = { 
+const firebaseConfig = {
   apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
   authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
   projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
