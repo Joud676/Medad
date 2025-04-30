@@ -1,48 +1,81 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDF5K3Kyv8EfNQnG5vesQAo6gTuXfUwGng",
+    authDomain: "medad-c9a51.firebaseapp.com",
+    projectId: "medad-c9a51",
+    storageBucket: "medad-c9a51.firebasestorage.app",
+    messagingSenderId: "307233635022",
+    appId: "1:307233635022:web:e08899b7f8beb58b6cee9f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
 const statusDiv = document.getElementById('status');
 
 function showStatus(message, isError = false) {
     statusDiv.textContent = message;
     statusDiv.style.display = 'block';
-    statusDiv.style.backgroundColor = isError ? '#f8d7da' : '#d4edda';
-    statusDiv.style.color = isError ? '#721c24' : '#155724';
+    if (isError) {
+        statusDiv.style.backgroundColor = '#f8d7da';
+        statusDiv.style.color = '#721c24';
+    } else {
+        statusDiv.style.backgroundColor = '#d4edda';
+        statusDiv.style.color = '#155724';
+    }
 }
 
-document.getElementById('readerSignupForm').addEventListener('submit', function (e) {
+document.getElementById('readerSignupForm').addEventListener('submit', function(e) {
     e.preventDefault();
-
+    
     const fullName = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-
+    
     if (password.length < 6) {
         showStatus('كلمة المرور يجب أن تكون على الأقل 6 أحرف', true);
         return;
     }
-
+    
     showStatus('جاري إنشاء الحساب...');
-
-    auth.createUserWithEmailAndPassword(email, password)
+    
+    createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            return db.collection("Readers").add({
-                uid: userCredential.user.uid,
+            const user = userCredential.user;
+            
+            return addDoc(collection(db, "Readers"), {
+                uid: user.uid,
                 fullName: fullName,
                 email: email,
-                joinedAt: new Date()
+                joinedAt: new Date(),
+                favoriteBooks: []
             });
         })
         .then(() => {
             showStatus("تم إنشاء الحساب بنجاح! جاري التوجيه...");
             setTimeout(() => {
-                window.location.href = "/HTML/ReaderHomePage.html";
+                window.location.href = "ReaderHomePage.html";
             }, 2000);
         })
         .catch((error) => {
-            const messages = {
-                'auth/email-already-in-use': "البريد الإلكتروني مستخدم بالفعل",
-                'auth/weak-password': "كلمة المرور ضعيفة جدًا",
-                'auth/invalid-email': "البريد الإلكتروني غير صالح",
-                'auth/network-request-failed': "تأكد من اتصالك بالإنترنت"
-            };
-            showStatus(messages[error.code] || "حدث خطأ: " + error.message, true);
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            
+            if (errorCode === 'auth/email-already-in-use') {
+                showStatus("البريد الإلكتروني مستخدم بالفعل", true);
+            } else if (errorCode === 'auth/weak-password') {
+                showStatus("كلمة المرور ضعيفة جدًا", true);
+            } else if (errorCode === 'auth/invalid-email') {
+                showStatus("البريد الإلكتروني غير صالح", true);
+            } else if (errorCode === 'auth/network-request-failed') {
+                showStatus("فشل الاتصال بالشبكة. تأكد من اتصالك بالإنترنت", true);
+            } else {
+                showStatus("حدث خطأ: " + errorMessage, true);
+            }
+            console.error(error);
         });
 });
