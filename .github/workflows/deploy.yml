@@ -1,4 +1,4 @@
-nname: Inject Firebase Secrets and Deploy to Vercel
+name: Inject Firebase Secrets and Deploy to Vercel
 
 on:
   push:
