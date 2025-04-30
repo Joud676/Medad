@@ -27,6 +27,9 @@ jobs:
           MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
           APPID: ${{ secrets.APPID }}
 
+      - name: 🔍 Show generated firebase-config.js
+        run: cat public/JS/firebase-config.js
+
       - name: 🚀 Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
