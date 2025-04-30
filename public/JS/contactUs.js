@@ -68,8 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 message: message.value
             };
 
-            // Sending to your local server (Node.js)
-            fetch('/submitForm', {
+            fetch('/api/submitForm', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
