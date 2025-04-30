@@ -88,7 +88,7 @@ function createAuthorBookCard(book, bookId, bookTitle) {
 
   editButton.onclick = () => {
     localStorage.setItem('bookID', bookId); // حفظ bookID
-    window.location.href = "/WriteABook.html";
+    window.location.href = "HTML/WriteABook.html";
   };
 
 
