@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentDarkColor = colors[0].dark;
 
     const bookCoverImage = new Image();
-    bookCoverImage.src = '../images/BookCover.png';
+    bookCoverImage.src = '/images/BookCover.png';
     bookCoverImage.onload = () => drawBookCover();
 
     function drawBookCover() {
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             showSuccessAlert('تمت إضافة الكتاب بنجاح!', () => {
-                window.location.href = "WriterHomePage.html";
+                window.location.href = "/WriterHomePage.html";
             });
 
         } catch (error) {

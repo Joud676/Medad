@@ -68,7 +68,7 @@ function createAuthorBookCard(book, bookId, bookTitle) {
   card.classList.add("book-card");
 
   const img = document.createElement("img");
-  img.src = book.coverImageUrl || "../images/BookCover.png";
+  img.src = book.coverImageUrl || "/images/BookCover.png";
   img.alt = book.title || "كتاب بدون عنوان";
 
   const title = document.createElement("h3");
@@ -88,7 +88,7 @@ function createAuthorBookCard(book, bookId, bookTitle) {
 
   editButton.onclick = () => {
     localStorage.setItem('bookID', bookId); // حفظ bookID
-    window.location.href = "WriteABook.html";
+    window.location.href = "/WriteABook.html";
   };
 
 
@@ -173,6 +173,6 @@ function showNoBooks(container) {
   container.style.minHeight = "310px";
   container.innerHTML = `
       <p style="font-size:1.5rem; color:#7f8c8d; margin-bottom:1rem;">لا يوجد لديك كتب حتى الآن.</p>
-      <a href="AddBook.html" class="start-journey-btn">انشر كتابك الأول</a>
+      <a href="/AddBook.html" class="start-journey-btn">انشر كتابك الأول</a>
     `;
 }

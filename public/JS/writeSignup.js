@@ -4,13 +4,13 @@ import { getFirestore, collection, addDoc } from "https://www.gstatic.com/fireba
 
 
 
-const firebaseConfig = { 
-  apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
-  authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
-  projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
-  storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
-  messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
-  appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
+const firebaseConfig = {
+    apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
+    authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
+    projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
+    storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
+    messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
+    appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
 };
 
 const app = initializeApp(firebaseConfig);
@@ -61,7 +61,7 @@ document.getElementById('writerSignupForm').addEventListener('submit', function 
         .then(() => {
             showStatus("تم إنشاء الحساب بنجاح! جاري التوجيه...");
             setTimeout(() => {
-                window.location.href = "WriterHomePage.html";
+                window.location.href = "/WriterHomePage.html";
             }, 2000);
         })
         .catch((error) => {

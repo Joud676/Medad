@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 
-const firebaseConfig = { 
+const firebaseConfig = {
   apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
   authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
   projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
@@ -30,7 +30,7 @@ function registerReader(email, password, fullName) {
       });
     })
     .then(() => {
-      window.location.href = "ReaderHomePage.html";
+      window.location.href = "/ReaderHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في التسجيل: " + error.message);
@@ -52,7 +52,7 @@ function registerWriter(email, password, fullName) {
       });
     })
     .then(() => {
-      window.location.href = "WriterHomePage.html";
+      window.location.href = "/WriterHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في التسجيل: " + error.message);
@@ -63,7 +63,7 @@ function registerWriter(email, password, fullName) {
 function loginReader(email, password) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      window.location.href = "ReaderHomePage.html";
+      window.location.href = "/ReaderHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في تسجيل الدخول: " + error.message);
@@ -74,7 +74,7 @@ function loginReader(email, password) {
 function loginWriter(email, password) {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      window.location.href = "WriterHomePage.html";
+      window.location.href = "/WriterHomePage.html";
     })
     .catch((error) => {
       alert("حدث خطأ في تسجيل الدخول: " + error.message);

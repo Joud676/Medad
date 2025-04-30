@@ -2,7 +2,7 @@ const canvas = document.getElementById('book-cover-canvas');
 const ctx = canvas.getContext('2d');
 
 const bookCoverImage = new Image();
-bookCoverImage.src = '../images/BookCover.png';
+bookCoverImage.src = '/images/BookCover.png';
 bookCoverImage.onload = () => {
     drawBookCover();
 };
@@ -73,7 +73,7 @@ form.addEventListener('submit', (event) => {
     if (form.reportValidity()) {
         showAlert('تمت إضافة الكتاب بنجاح!');
         setTimeout(() => {
-            window.location.href = "WriteABook.html";
+            window.location.href = "/WriteABook.html";
         }, 5000);
     }
 

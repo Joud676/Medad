@@ -2,13 +2,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 
-const firebaseConfig = { 
-  apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
-  authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
-  projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
-  storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
-  messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
-  appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
+const firebaseConfig = {
+    apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
+    authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
+    projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
+    storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
+    messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
+    appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
 };
 
 // تهيئة Firebase
@@ -45,7 +45,7 @@ document.getElementById('readerLoginForm').addEventListener('submit', function (
 
             // توجيه المستخدم بعد مهلة قصيرة
             setTimeout(() => {
-                window.location.href = "ReaderHomePage.html";
+                window.location.href = "/ReaderHomePage.html";
             }, 2000);
         })
         .catch((error) => {

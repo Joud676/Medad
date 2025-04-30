@@ -80,14 +80,14 @@ function createBookCard(book, bookId, showDeleteButton = false) {
   const card = document.createElement("div");
   card.classList.add("book-card");
 
-  const imageUrl = book.coverImageUrl || "../images/BookCover.png";
+  const imageUrl = book.coverImageUrl || "/images/BookCover.png";
   const img = document.createElement("img");
   img.src = imageUrl;
   img.alt = book.title || "كتاب بدون عنوان";
 
   img.onerror = function () {
     this.onerror = null;
-    this.src = "../images/BookCover.png";
+    this.src = "/images/BookCover.png";
   };
 
   const p = document.createElement("p");
@@ -135,7 +135,7 @@ function createBookCard(book, bookId, showDeleteButton = false) {
 
   card.addEventListener("click", function () {
     localStorage.setItem("selectedBookId", bookId);
-    window.location.href = "ReadABook.html";
+    window.location.href = "/ReadABook.html";
   });
 
   return card;
