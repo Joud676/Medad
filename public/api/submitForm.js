@@ -30,7 +30,7 @@ export default async function handler(req, res) {
             docId: docRef.id,
         });
     } catch (error) {
-        console.error('Error adding document:', error);
+        console.error(' Server error in submitForm API:', error);
         res.status(500).json({
             message: 'Error submitting the form',
             error: error.message,
