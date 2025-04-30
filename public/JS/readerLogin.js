@@ -1,22 +1,4 @@
-<!-- استيراد Firebase v8 -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-
-<script>
-  // تكوين Firebase
-  var firebaseConfig = {
-    apiKey: "AIzaSyDF5K3Kyv8EfNQnG5vesQAo6gTuXfUwGng",
-    authDomain: "medad-c9a51.firebaseapp.com",
-    projectId: "medad-c9a51",
-    storageBucket: "medad-c9a51.firebasestorage.app",
-    messagingSenderId: "307233635022",
-    appId: "1:307233635022:web:e08899b7f8beb58b6cee9f"
-  };
-
-  // تهيئة Firebase
-  firebase.initializeApp(firebaseConfig);
-
-  // عنصر عرض حالة تسجيل الدخول
+// عنصر عرض حالة تسجيل الدخول
   const statusDiv = document.getElementById('status');
 
   // دالة لعرض رسائل الحالة
@@ -65,4 +47,3 @@
         console.error(error);
       });
   });
-</script>
