@@ -1,4 +1,4 @@
-name: Inject Firebase Secrets and Deploy to Vercel 
+name: Inject Firebase Secrets and Deploy to Vercel
 
 on:
   push:
@@ -13,17 +13,14 @@ jobs:
       - name: 📥 Checkout code
         uses: actions/checkout@v3
 
-      - name: 🔐 Inject Firebase config
+      - name: 🔐 Replace Firebase placeholders in config
         run: |
-          mkdir -p public/JS
-          envsubst < public/JS/firebase-config.template.js > public/JS/firebase-config.js
-        env:
-          APIKEY: ${{ secrets.APIKEY }}
-          AUTHDOMAIN: ${{ secrets.AUTHDOMAIN }}
-          PROJECTID: ${{ secrets.PROJECTID }}
-          STORAGEBUCKET: ${{ secrets.STORAGEBUCKET }}
-          MESSAGINGSENDERID: ${{ secrets.MESSAGINGSENDERID }}
-          APPID: ${{ secrets.APPID }}
+          sed -i 's|\${APIKEY}|${{ secrets.APIKEY }}|g' public/JS/firebase-config.js
+          sed -i 's|\${AUTHDOMAIN}|${{ secrets.AUTHDOMAIN }}|g' public/JS/firebase-config.js
+          sed -i 's|\${PROJECTID}|${{ secrets.PROJECTID }}|g' public/JS/firebase-config.js
+          sed -i 's|\${STORAGEBUCKET}|${{ secrets.STORAGEBUCKET }}|g' public/JS/firebase-config.js
+          sed -i 's|\${MESSAGINGSENDERID}|${{ secrets.MESSAGINGSENDERID }}|g' public/JS/firebase-config.js
+          sed -i 's|\${APPID}|${{ secrets.APPID }}|g' public/JS/firebase-config.js
 
       - name: 🚀 Deploy to Vercel
         uses: amondnet/vercel-action@v20
