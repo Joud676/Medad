@@ -3,6 +3,7 @@ import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 
+
 const firebaseConfig = { 
   apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
   authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
