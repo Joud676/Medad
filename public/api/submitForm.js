@@ -3,7 +3,7 @@ import { getFirestore } from 'firebase-admin/firestore';
 
 const serviceAccount = {
     projectId: process.env.PROJECTID,
-    privateKey: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+    privateKey: process.env.PRIVATE_KEY.replaceAll('\\n', '\n'),
     clientEmail: process.env.CLIENT_EMAIL,
 };
 
