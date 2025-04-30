@@ -1,11 +1,10 @@
-
 const firebaseConfig = {
-  apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
-  authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
-  projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
-  storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
-  messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
-  appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
+  apiKey: "${APIKEY}",
+  authDomain: "${AUTHDOMAIN}",
+  projectId: "${PROJECTID}",
+  storageBucket: "${STORAGEBUCKET}",
+  messagingSenderId: "${MESSAGINGSENDERID}",
+  appId: "${APPID}"
 };
 
 if (typeof firebase === 'undefined') {
@@ -16,10 +15,12 @@ if (typeof firebase === 'undefined') {
   }
 
   window.db = firebase.firestore();
+
   try {
     window.auth = firebase.auth ? firebase.auth() : null;
   } catch (e) {
     console.error('Authentication service not available.');
   }
+
   console.log('Firebase initialized successfully');
 }

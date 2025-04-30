@@ -1,2 +1,9 @@
-# Ignore generated Firebase config with secrets
+# Ignore generated Firebase config
 public/JS/firebase-config.js
+
+# Node/Vercel defaults (optional extras)
+node_modules/
+.env
+.DS_Store
+.vercel
+
