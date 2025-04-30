@@ -1,13 +1,14 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-const firebaseConfig = {
-    apiKey: process.env.APIKEY,  // GitHub Secret FIREBASE_APIKEY
-    authDomain: process.env.AUTHDOMAIN,  // GitHub Secret FIREBASE_AUTHDOMAIN
-    projectId: process.env.PROJECTID,  // GitHub Secret FIREBASE_PROJECTID
-    storageBucket: process.env.STORAGEBUCKET,  // GitHub Secret FIREBASE_STORAGEBUCKET
-    messagingSenderId: process.env.MESSAGINGSENDERID,  // GitHub Secret FIREBASE_MESSAGINGSENDERID
-    appId: process.env.APPID,  // GitHub Secret FIREBASE_APPID
+
+const firebaseConfig = { 
+  apiKey: "${APIKEY}",  // GitHub Secret FIREBASE_APIKEY
+  authDomain: "${AUTHDOMAIN}",  // GitHub Secret FIREBASE_AUTHDOMAIN
+  projectId: "${PROJECTID}",  // GitHub Secret FIREBASE_PROJECTID
+  storageBucket: "${STORAGEBUCKET}",  // GitHub Secret FIREBASE_STORAGEBUCKET
+  messagingSenderId: "${MESSAGINGSENDERID}",  // GitHub Secret FIREBASE_MESSAGINGSENDERID
+  appId: "${APPID}",  // GitHub Secret FIREBASE_APPID
 };
 
 // تهيئة Firebase
