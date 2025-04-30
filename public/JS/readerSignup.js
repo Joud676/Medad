@@ -62,4 +62,3 @@
               console.error(error);
           });
   });
-</script>
