@@ -15,12 +15,10 @@ if (typeof firebase === 'undefined') {
   }
 
   window.db = firebase.firestore();
-
   try {
     window.auth = firebase.auth ? firebase.auth() : null;
   } catch (e) {
     console.error('Authentication service not available.');
   }
-
   console.log('Firebase initialized successfully');
 }
