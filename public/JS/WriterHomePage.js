@@ -1,4 +1,3 @@
-//  لما يدخل الكاتب
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     const userId = user.uid;
@@ -7,7 +6,6 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
-//  تحميل كتب الكاتب
 function loadAuthorBooks(userId) {
   const authorLibraryContainer = document.querySelector(".library-grid");
 
@@ -62,7 +60,6 @@ function loadAuthorBooks(userId) {
     });
 }
 
-//  إنشاء كرت كتاب الكاتب
 function createAuthorBookCard(book, bookId, bookTitle) {
   const card = document.createElement("div");
   card.classList.add("book-card");
@@ -87,7 +84,7 @@ function createAuthorBookCard(book, bookId, bookTitle) {
   editButton.textContent = "تحرير";
 
   editButton.onclick = () => {
-    localStorage.setItem('bookID', bookId); // حفظ bookID
+    localStorage.setItem('bookID', bookId);
     window.location.href = "/HTML/WriteABook.html";
   };
 
@@ -164,7 +161,6 @@ function createAuthorBookCard(book, bookId, bookTitle) {
   return card;
 }
 
-//  دالة تظهر رسالة "لا يوجد كتب"
 function showNoBooks(container) {
   container.style.display = "flex";
   container.style.flexDirection = "column";
