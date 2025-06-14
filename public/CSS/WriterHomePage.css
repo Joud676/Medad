@@ -434,7 +434,7 @@ button:hover {
   .challenge-card p {
     font-size: 1rem;
   }
-  
+
   .intro {
     flex-direction: column;
     text-align: center;
@@ -476,13 +476,13 @@ button:hover {
     grid-template-columns: repeat(2, 1fr);
     gap: 2%;
     margin: 0% 2%;
-   }
+  }
 
   .feature-card {
-    
-    flex-direction:column-reverse;
-    align-items:center;
-    text-align:center;
+
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
   }
 
   .feature-icon {

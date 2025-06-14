@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي</title>
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="/CSS/UserProfile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" href="/images/MedadLogo-Square.png" type="image/png">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/index.html" class="logo">
+                <img src="/images/MedadWhite.png" alt="Medad Logo" style="width: 50%;">
+            </a>
+            <nav class="top-nav">
+                <ul>
+                    <li><a href="/HTML/ReaderHomePage.html">
+                            <i class="fas fa-home"></i>الصفحة الرئيسية</a></li>
+                    <li class="active"><a href="/HTML/user-profile.html">
+                            <i class="fas fa-user"></i>ملفي الشخصي</a></li>
+                    <li><a href="/HTML/ContactUs.html">
+                            <i class="fas fa-envelope"></i>اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <section class="profile-header">
+            <div class="profile-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <h1 id="profile-name">جاري التحميل...</h1>
+            <p id="profile-email" class="profile-email">جاري التحميل...</p>
+        </section>
+
+        <section class="profile-actions">
+            <div class="action-card" id="change-password-card">
+                <div class="action-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>تغيير كلمة المرور</h3>
+                <form id="change-password-form" class="hidden">
+                    <div class="form-group">
+                        <label for="current-password">كلمة المرور الحالية</label>
+                        <input type="password" id="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">كلمة المرور الجديدة</label>
+                        <input type="password" id="new-password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" required minlength="6">
+                    </div>
+                    <button type="submit" class="btn">حفظ التغييرات</button>
+                    <button type="button" class="btn cancel-btn" id="cancel-password">إلغاء</button>
+                </form>
+                <button id="show-password-form" class="btn">تغيير كلمة المرور</button>
+            </div>
+
+            <div class="action-card">
+                <div class="action-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                <h3>تسجيل الخروج</h3>
+                <button id="logout-btn" class="btn">تسجيل الخروج</button>
+            </div>
+        </section>
+
+        <div id="status-message" class="status-message hidden"></div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <ul>
+                    <li><a href="/index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                    <li><a href="/HTML/ReaderHomePage.html"><i class="fas fa-book"></i> الكتب</a></li>
+                    <li><a href="/HTML/AboutUs.html"><i class="fas fa-address-card"></i> عن المنصة</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>تواصل معنا </h3>
+                <p><i class="fas fa-envelope"></i> البريد الإلكتروني: medad@gmail.com</p>
+                <p><i class="fas fa-phone"></i> الهاتف: +966 508224252</p>
+            </div>
+            <div class="footer-section">
+                <h3>مداد</h3>
+                <p>مكتبة إلكترونية متكاملة لعشاق القراءة</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 مداد. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="/JS/firebase-config.js"></script>
+    <script src="/JS/UserProfile.js"></script>
+</body>
+
+</html>
