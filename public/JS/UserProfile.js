@@ -129,6 +129,7 @@ function HomePageRedirect() {
 
         const db = firebase.firestore();
         const uid = user.uid;
+        console.log("✅ UID:", uid);
 
         try {
             const [authorDoc, readerDoc] = await Promise.all([
@@ -136,18 +137,25 @@ function HomePageRedirect() {
                 db.collection('Readers').doc(uid).get()
             ]);
 
-            if (!authorDoc.exists && readerDoc.exists) {
-                window.location.href = '/HTML/ReaderHomePage.html';
-            } else if (authorDoc.exists && !readerDoc.exists) {
+            console.log("🟣 authorDoc.exists:", authorDoc.exists);
+            console.log("🔵 readerDoc.exists:", readerDoc.exists);
+
+            if (authorDoc.exists && !readerDoc.exists) {
+                console.log("🔁 Redirecting to Writer");
                 window.location.href = '/HTML/WriterHomePage.html';
+            } else if (!authorDoc.exists && readerDoc.exists) {
+                console.log("🔁 Redirecting to Reader");
+                window.location.href = '/HTML/ReaderHomePage.html';
             } else if (authorDoc.exists && readerDoc.exists) {
-                alert("⚠ يوجد خلل في الحساب: المستخدم موجود ككاتب وقارئ. الرجاء مراجعة الدعم.");
+                console.log("⚠ User exists in both Authors and Readers");
+                alert("⚠ المستخدم موجود ككاتب وقارئ. يرجى التواصل مع الدعم.");
             } else {
-                alert("⚠ لم يتم العثور على حسابك ضمن الكتّاب أو القراء.");
+                console.log("⚠ User exists in neither collection.");
+                alert("⚠ لم يتم العثور على المستخدم.");
             }
 
         } catch (error) {
-            console.error('Error getting user role:', error);
+            console.error('🔥 Error checking user role:', error);
         }
     });
 }
