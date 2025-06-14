@@ -1,131 +1,218 @@
+* {
+    font-family: 'Tajawal', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fcf9f6;
+    color: #333;
+    direction: rtl;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 .profile-container {
     max-width: 1200px;
     margin: 50px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    background: linear-gradient(135deg, #f3eefb 0%, #ded3f1 100%);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, #706999, #87a56f);
+    transform: rotate(0deg);
+    transition: all 0.6s ease;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.profile-container:hover::before {
+    transform: rotate(360deg);
 }
 
 .profile-header {
     text-align: center;
     margin-bottom: 40px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(112, 105, 153, 0.2);
+}
+
+.profile-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #afa1c7, #706999);
 }
 
 .profile-avatar {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto 20px;
     background-color: #f3eefb;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 4px solid #998cb0;
+    border: 5px solid #998cb0;
+    box-shadow: 0 5px 15px rgba(112, 105, 153, 0.3);
 }
 
 .profile-avatar i {
-    font-size: 60px;
+    font-size: 70px;
     color: #796a97;
 }
 
 .profile-header h1 {
-    font-size: 28px;
-    color: #333;
+    font-size: 32px;
+    color: #5d3f8a;
     margin-bottom: 10px;
+    font-weight: 800;
+    position: relative;
+    display: inline-block;
+}
+
+.profile-header h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #afa1c7, #706999);
+    border-radius: 2px;
 }
 
 .profile-email {
-    font-size: 18px;
-    color: #666;
+    font-size: 20px;
+    color: #706999;
     margin-bottom: 0;
+    font-weight: 600;
 }
 
 .profile-actions {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 25px;
     margin-top: 30px;
 }
 
 .action-card {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(112, 105, 153, 0.1);
 }
 
 .action-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .action-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 15px;
-    background-color: #f3eefb;
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #afa1c7, #796a97);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #796a97;
-    font-size: 24px;
+    color: white;
+    font-size: 30px;
+    box-shadow: 0 5px 10px rgba(112, 105, 153, 0.3);
 }
 
 .action-card h3 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 20px;
+    font-size: 22px;
+    color: #5d3f8a;
+    margin-bottom: 25px;
+    font-weight: 700;
 }
 
 .action-card .btn {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
 }
 
 .cancel-btn {
     background-color: #f1f1f1;
-    color: #333;
-    margin-top: 10px;
+    color: #5d3f8a;
+    border: 1px solid #ddd;
 }
 
 .cancel-btn:hover {
     background-color: #e1e1e1;
+    color: #5d3f8a;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: right;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: #5d3f8a;
     font-weight: 600;
+    font-size: 16px;
 }
 
 .form-group input {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #998cb0;
+    box-shadow: 0 0 0 3px rgba(153, 140, 176, 0.2);
+    outline: none;
 }
 
 .status-message {
-    padding: 15px;
+    padding: 20px;
     margin: 20px 0;
-    border-radius: 8px;
+    border-radius: 10px;
     text-align: center;
     font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .status-message.success {
@@ -145,15 +232,65 @@
 }
 
 @media (max-width: 768px) {
+    .profile-container {
+        padding: 25px;
+    }
+
     .profile-actions {
         grid-template-columns: 1fr;
+    }
+
+    .profile-header {
+        padding: 20px;
+    }
+
+    .action-card {
+        padding: 25px;
+    }
+
+    .profile-avatar {
+        width: 120px;
+        height: 120px;
+    }
+
+    .profile-avatar i {
+        font-size: 50px;
+    }
+
+    .profile-header h1 {
+        font-size: 26px;
+    }
+
+    .profile-email {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 15px;
+    }
+
+    .action-card {
+        padding: 20px;
     }
 
     .profile-header {
         padding: 15px;
     }
 
-    .action-card {
-        padding: 20px;
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+
+    .action-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+    }
+
+    .action-card h3 {
+        font-size: 18px;
     }
 }
