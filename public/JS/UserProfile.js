@@ -134,11 +134,13 @@ function HomePageRedirect() {
             if (doc.exists) {
                 window.location.href = '/HTML/WriterHomePage.html';
             } else {
-                return db.collection('Readers').doc(uid).get();
-            }
-        }).then((doc) => {
-            if (doc?.exists) {
-                window.location.href = '/HTML/ReaderHomePage.html';
+                db.collection('Readers').doc(uid).get().then((readerDoc) => {
+                    if (readerDoc.exists) {
+                        window.location.href = '/HTML/ReaderHomePage.html';
+                    } else {
+                        console.warn("المستخدم ليس كاتبًا ولا قارئًا.");
+                    }
+                });
             }
         }).catch((error) => {
             console.error('Error getting user role:', error);
