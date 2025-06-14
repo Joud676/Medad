@@ -12,29 +12,38 @@ document.addEventListener('DOMContentLoaded', function () {
             profileName.textContent = 'جاري التحميل...';
             profileEmail.textContent = user.email;
 
-            if (user.uid) {
-                firebase.firestore().collection('Authors').doc(user.uid).get()
-                    .then(doc => {
-                        if (doc.exists && doc.data().fullName) {
-                            profileName.textContent = doc.data().fullName;
-                        } else {
-                            return firebase.firestore().collection('Readers').doc(user.uid).get();
-                        }
-                    })
-                    .then(doc => {
-                        if (doc?.exists && doc.data().fullName) {
-                            profileName.textContent = doc.data().fullName;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching profile name:', error);
+            const uid = user.uid;
+
+            firebase.firestore().collection('Authors').doc(uid).get()
+                .then(doc => {
+                    if (doc.exists) {
+                        console.log('👤 Found in Authors:', doc.data());
+                        const name = doc.data().fullName || 'بدون اسم';
+                        profileName.textContent = name;
+                    } else {
+                        console.log('❌ Not found in Authors. Trying Readers...');
+                        return firebase.firestore().collection('Readers').doc(uid).get();
+                    }
+                })
+                .then(doc => {
+                    if (doc?.exists) {
+                        console.log('👤 Found in Readers:', doc.data());
+                        const name = doc.data().fullName || 'بدون اسم';
+                        profileName.textContent = name;
+                    } else if (doc !== undefined) {
+                        console.log('❌ Not found in Readers either.');
                         profileName.textContent = 'مستخدم';
-                    });
-            }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching profile name:', error);
+                    profileName.textContent = 'مستخدم';
+                });
         } else {
             window.location.href = '/index.html';
         }
     });
+
 
     showPasswordFormBtn.addEventListener('click', function () {
         changePasswordForm.classList.remove('hidden');
