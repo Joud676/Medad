@@ -18,9 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         if (doc.exists && doc.data().fullName) {
                             profileName.textContent = doc.data().fullName;
                         }
-                    })
-                    .catch(error => {
-                        console.error(error);
                     });
             }
         } else {
@@ -37,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     cancelPasswordBtn.addEventListener('click', function () {
         changePasswordForm.classList.add('hidden');
         showPasswordFormBtn.classList.remove('hidden');
-        document.getElementById('change-password-form').reset();
+        changePasswordForm.reset();
         statusMessage.classList.add('hidden');
     });
 
@@ -77,13 +74,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 showPasswordFormBtn.classList.remove('hidden');
             })
             .catch(error => {
+                const errorCode = error.code || '';
                 let errorMessage = 'حدث خطأ أثناء تغيير كلمة المرور';
 
-                if (error.code === 'auth/wrong-password') {
+                if (errorCode.includes('wrong-password')) {
                     errorMessage = 'كلمة المرور الحالية غير صحيحة';
-                } else if (error.code === 'auth/weak-password') {
+                } else if (errorCode.includes('weak-password')) {
                     errorMessage = 'كلمة المرور الجديدة ضعيفة جداً';
-                } else if (error.code === 'auth/requires-recent-login') {
+                } else if (errorCode.includes('requires-recent-login')) {
                     errorMessage = 'يجب تسجيل الدخول حديثاً';
                 }
 
@@ -95,10 +93,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     logoutBtn.addEventListener('click', function () {
         firebase.auth().signOut()
-            .then(() => window.location.href = '/index.html')
-            .catch(error => {
-                showStatus('حدث خطأ أثناء تسجيل الخروج', 'error');
-            });
+            .then(() => window.location.href = '/index.html');
     });
 
     function showStatus(message, type) {
