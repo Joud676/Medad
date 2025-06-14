@@ -121,23 +121,27 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function HomePageRedirect() {
-    const user = firebase.auth().currentUser;
-    if (!user) return;
-
-    const db = firebase.firestore();
-    const uid = user.uid;
-
-    db.collection('Authors').doc(uid).get().then((doc) => {
-        if (doc.exists) {
-            window.location.href = '/HTML/WriterHomePage.html';
-        } else {
-            return db.collection('Readers').doc(uid).get();
+    firebase.auth().onAuthStateChanged((user) => {
+        if (!user) {
+            window.location.href = '/index.html';
+            return;
         }
-    }).then((doc) => {
-        if (doc?.exists) {
-            window.location.href = '/HTML/ReaderHomePage.html';
-        }
-    }).catch((error) => {
-        console.error('Error getting user role:', error);
+
+        const db = firebase.firestore();
+        const uid = user.uid;
+
+        db.collection('Authors').doc(uid).get().then((doc) => {
+            if (doc.exists) {
+                window.location.href = '/HTML/WriterHomePage.html';
+            } else {
+                return db.collection('Readers').doc(uid).get();
+            }
+        }).then((doc) => {
+            if (doc?.exists) {
+                window.location.href = '/HTML/ReaderHomePage.html';
+            }
+        }).catch((error) => {
+            console.error('Error getting user role:', error);
+        });
     });
 }
