@@ -27,8 +27,8 @@ document.getElementById('writerSignupForm').addEventListener('submit', function 
     showStatus('جاري إنشاء الحساب...');
 
     auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+        .then(() => {
+            const user = auth.currentUser;
 
             return db.collection("Authors").doc(user.uid).set({
                 uid: user.uid,
