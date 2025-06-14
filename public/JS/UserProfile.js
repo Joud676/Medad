@@ -7,30 +7,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const changePasswordForm = document.getElementById('change-password-form');
     const statusMessage = document.getElementById('status-message');
 
-    function loadUserProfile() {
-        const user = firebase.auth().currentUser;
-
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            profileName.textContent = user.displayName || 'مستخدم بدون اسم';
-            profileEmail.textContent = user.email;
-
-            if (user.uid) {
-                const db = firebase.firestore();
-                db.collection('Authors').doc(user.uid).get()
-                    .then(doc => {
-                        if (doc.exists) {
-                            const data = doc.data();
-                            if (data.fullName) {
-                                profileName.textContent = data.fullName;
-                            }
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error loading additional user data:', error);
-                    });
-            }
+            loadUserProfile(user);
         } else {
             window.location.href = '/index.html';
+        }
+    });
+
+    function loadUserProfile(user) {
+        profileName.textContent = user.displayName || 'مستخدم بدون اسم';
+        profileEmail.textContent = user.email;
+
+        if (user.uid) {
+            const db = firebase.firestore();
+            db.collection('Authors').doc(user.uid).get()
+                .then(doc => {
+                    if (doc.exists && doc.data().fullName) {
+                        profileName.textContent = doc.data().fullName;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
     }
 
@@ -63,15 +62,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const user = firebase.auth().currentUser;
-        const credential = firebase.auth.EmailAuthProvider.credential(
-            user.email,
-            currentPassword
-        );
+        const credential = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
 
         user.reauthenticateWithCredential(credential)
-            .then(() => {
-                return user.updatePassword(newPassword);
-            })
+            .then(() => user.updatePassword(newPassword))
             .then(() => {
                 showStatus('تم تغيير كلمة المرور بنجاح', 'success');
                 changePasswordForm.classList.add('hidden');
@@ -79,40 +73,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('change-password-form').reset();
             })
             .catch(error => {
-                console.error('Error changing password:', error);
                 let errorMessage = 'حدث خطأ أثناء تغيير كلمة المرور';
-
-                if (error.code === 'auth/wrong-password') {
-                    errorMessage = 'كلمة المرور الحالية غير صحيحة';
-                } else if (error.code === 'auth/weak-password') {
-                    errorMessage = 'كلمة المرور ضعيفة جدًا';
-                }
-
+                if (error.code === 'auth/wrong-password') errorMessage = 'كلمة المرور الحالية غير صحيحة';
+                else if (error.code === 'auth/weak-password') errorMessage = 'كلمة المرور ضعيفة جدًا';
                 showStatus(errorMessage, 'error');
             });
     });
 
     logoutBtn.addEventListener('click', function () {
         firebase.auth().signOut()
-            .then(() => {
-                window.location.href = '/index.html';
-            })
-            .catch(error => {
-                console.error('Error signing out:', error);
-                showStatus('حدث خطأ أثناء تسجيل الخروج', 'error');
-            });
+            .then(() => window.location.href = '/index.html')
+            .catch(error => showStatus('حدث خطأ أثناء تسجيل الخروج', 'error'));
     });
 
     function showStatus(message, type) {
         statusMessage.textContent = message;
-        statusMessage.className = 'status-message';
-        statusMessage.classList.add(type);
+        statusMessage.className = 'status-message ' + type;
         statusMessage.classList.remove('hidden');
-
-        setTimeout(() => {
-            statusMessage.classList.add('hidden');
-        }, 5000);
+        setTimeout(() => statusMessage.classList.add('hidden'), 5000);
     }
-
-    loadUserProfile();
 });
