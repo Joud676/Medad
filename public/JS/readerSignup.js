@@ -12,25 +12,25 @@ function showStatus(message, isError = false) {
     }
 }
 
-document.getElementById('readerSignupForm').addEventListener('submit', function(e) {
+document.getElementById('readerSignupForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    
+
     const fullName = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    
+
     if (password.length < 6) {
         showStatus('كلمة المرور يجب أن تكون على الأقل 6 أحرف', true);
         return;
     }
-    
+
     showStatus('جاري إنشاء الحساب...');
-    
+
     auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
             const user = userCredential.user;
 
-            return db.collection("Readers").add({
+            return setDoc(doc(db, "Readers", user.uid), {
                 uid: user.uid,
                 fullName: fullName,
                 email: email,
@@ -41,7 +41,7 @@ document.getElementById('readerSignupForm').addEventListener('submit', function(
         .then(() => {
             showStatus("تم إنشاء الحساب بنجاح! جاري التوجيه...");
             setTimeout(() => {
-                window.location.href = "/ReaderHomePage.html"; 
+                window.location.href = "/ReaderHomePage.html";
             }, 2000);
         })
         .catch((error) => {
