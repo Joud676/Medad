@@ -30,6 +30,7 @@ document.getElementById('writerLoginForm').addEventListener('submit', async func
         })
         .catch((error) => {
             const errorCode = error.code;
+            const errorMessage = error.message || '';
 
             if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password') {
                 showStatus("البريد الإلكتروني أو كلمة المرور غير صحيحة", true);
@@ -39,22 +40,11 @@ document.getElementById('writerLoginForm').addEventListener('submit', async func
                 showStatus("تم تعطيل الحساب مؤقتًا بسبب محاولات تسجيل دخول متكررة. حاول مرة أخرى لاحقًا", true);
             } else if (errorCode === 'auth/network-request-failed') {
                 showStatus("فشل الاتصال بالشبكة. تأكد من اتصالك بالإنترنت", true);
+            } else if (errorMessage.includes("INVALID_LOGIN_CREDENTIALS")) {
+                showStatus("البريد الإلكتروني أو كلمة المرور غير صحيحة", true);
             } else {
-                showStatus("حدث خطأ: " + error.message, true);
+                showStatus("حدث خطأ: " + errorMessage, true);
             }
             console.error(error);
         });
-
-}
-);
-
-function mapFirebaseError(message) {
-    switch (message) {
-        case 'INVALID_LOGIN_CREDENTIALS':
-        case 'EMAIL_NOT_FOUND':
-        case 'INVALID_PASSWORD':
-            return "البريد الإلكتروني أو كلمة المرور غير صحيحة";
-        default:
-            return message || "حدث خطأ غير معروف أثناء التحقق";
-    }
-}
+});

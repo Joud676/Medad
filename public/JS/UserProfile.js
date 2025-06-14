@@ -17,27 +17,23 @@ document.addEventListener('DOMContentLoaded', function () {
             firebase.firestore().collection('Authors').doc(uid).get()
                 .then(doc => {
                     if (doc.exists) {
-                        console.log('👤 Found in Authors:', doc.data());
                         const name = doc.data().fullName || 'بدون اسم';
                         profileName.textContent = name;
                     } else {
-                        console.log('❌ Not found in Authors. Trying Readers...');
                         return firebase.firestore().collection('Readers').doc(uid).get();
                     }
                 })
                 .then(doc => {
                     if (doc?.exists) {
-                        console.log('👤 Found in Readers:', doc.data());
                         const name = doc.data().fullName || 'بدون اسم';
                         profileName.textContent = name;
                     } else if (doc !== undefined) {
-                        console.log('❌ Not found in Readers either.');
-                        profileName.textContent = 'مستخدم';
+                        profileName.textContent = 'لا يوجد اسم';
                     }
                 })
                 .catch(error => {
                     console.error('Error fetching profile name:', error);
-                    profileName.textContent = 'مستخدم';
+                    profileName.textContent = 'لا يوجد اسم';
                 });
         } else {
             window.location.href = '/index.html';
