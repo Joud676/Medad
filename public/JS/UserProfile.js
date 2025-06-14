@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            profileName.textContent = user.displayName || 'مستخدم بدون اسم';
+            profileName.textContent = user.fullName || 'مستخدم بدون اسم';
             profileEmail.textContent = user.email;
 
             if (user.uid) {
@@ -106,24 +106,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 function HomePageRedirect() {
     const user = firebase.auth().currentUser;
+    if (!user) return;
 
-    if (user) {
-        firebase.firestore().collection('Users').doc(user.uid).get()
-            .then(doc => {
-                if (doc.exists) {
-                    const userRole = doc.data().role;
+    const db = firebase.firestore();
+    const uid = user.uid;
 
-                    if (userRole === 'Reader') {
-                        window.location.href = '/HTML/ReaderHomePage.html';
-                    } else if (userRole === 'Writer') {
-                        window.location.href = '/HTML/WriterHomePage.html';
-                    } else {
-                        console.log('Unknown user role');
-                    }
-                }
-            })
-            .catch(error => {
-                console.error('Error getting user role:', error);
-            });
-    }
+    db.collection('Authors').doc(uid).get().then((doc) => {
+        if (doc.exists) {
+            window.location.href = '/HTML/WriterHomePage.html';
+        } else {
+            return db.collection('Readers').doc(uid).get();
+        }
+    }).then((doc) => {
+        if (doc?.exists) {
+            window.location.href = '/HTML/ReaderHomePage.html';
+        }
+    }).catch((error) => {
+        console.error('Error getting user role:', error);
+    });
 }
