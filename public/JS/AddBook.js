@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function HomePageRedirect() {
-    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged(async (user) => {
         if (!user) {
             window.location.href = '/index.html';
             return;
@@ -256,18 +256,24 @@ function HomePageRedirect() {
         const db = firebase.firestore();
         const uid = user.uid;
 
-        db.collection('Authors').doc(uid).get().then((doc) => {
-            if (doc.exists) {
+        try {
+            const [authorDoc, readerDoc] = await Promise.all([
+                db.collection('Authors').doc(uid).get(),
+                db.collection('Readers').doc(uid).get()
+            ]);
+
+            if (authorDoc.exists && !readerDoc.exists) {
                 window.location.href = '/HTML/WriterHomePage.html';
-            } else {
-                return db.collection('Readers').doc(uid).get();
-            }
-        }).then((doc) => {
-            if (doc?.exists) {
+            } else if (!authorDoc.exists && readerDoc.exists) {
                 window.location.href = '/HTML/ReaderHomePage.html';
+            } else if (authorDoc.exists && readerDoc.exists) {
+                alert("⚠ يوجد خلل في الحساب: المستخدم موجود ككاتب وقارئ. الرجاء مراجعة الدعم.");
+            } else {
+                alert("⚠ لم يتم العثور على حسابك ضمن الكتّاب أو القراء.");
             }
-        }).catch((error) => {
+
+        } catch (error) {
             console.error('Error getting user role:', error);
-        });
+        }
     });
 }
