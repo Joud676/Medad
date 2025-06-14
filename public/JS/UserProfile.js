@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.error('Error loading user data:', error);
                 });
         }
     }
@@ -36,20 +36,29 @@ document.addEventListener('DOMContentLoaded', function () {
     showPasswordFormBtn.addEventListener('click', function () {
         changePasswordForm.classList.remove('hidden');
         showPasswordFormBtn.classList.add('hidden');
+        statusMessage.classList.add('hidden');
     });
 
     cancelPasswordBtn.addEventListener('click', function () {
         changePasswordForm.classList.add('hidden');
         showPasswordFormBtn.classList.remove('hidden');
         document.getElementById('change-password-form').reset();
+        statusMessage.classList.add('hidden');
     });
 
-    document.getElementById('change-password-form').addEventListener('submit', function (e) {
+    changePasswordForm.addEventListener('submit', function (e) {
         e.preventDefault();
 
         const currentPassword = document.getElementById('current-password').value;
         const newPassword = document.getElementById('new-password').value;
         const confirmPassword = document.getElementById('confirm-password').value;
+
+        statusMessage.classList.add('hidden');
+
+        if (!currentPassword || !newPassword || !confirmPassword) {
+            showStatus('الرجاء تعبئة جميع الحقول', 'error');
+            return;
+        }
 
         if (newPassword !== confirmPassword) {
             showStatus('كلمة المرور الجديدة غير متطابقة', 'error');
@@ -68,23 +77,46 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(() => user.updatePassword(newPassword))
             .then(() => {
                 showStatus('تم تغيير كلمة المرور بنجاح', 'success');
+                changePasswordForm.reset();
                 changePasswordForm.classList.add('hidden');
                 showPasswordFormBtn.classList.remove('hidden');
-                document.getElementById('change-password-form').reset();
             })
-            .catch(error => {
-                let errorMessage = 'حدث خطأ أثناء تغيير كلمة المرور';
-                if (error.code === 'auth/wrong-password') errorMessage = 'كلمة المرور الحالية غير صحيحة';
-                else if (error.code === 'auth/weak-password') errorMessage = 'كلمة المرور ضعيفة جدًا';
-                showStatus(errorMessage, 'error');
-            });
+            .catch(handlePasswordChangeError);
     });
 
     logoutBtn.addEventListener('click', function () {
         firebase.auth().signOut()
             .then(() => window.location.href = '/index.html')
-            .catch(error => showStatus('حدث خطأ أثناء تسجيل الخروج', 'error'));
+            .catch(error => {
+                console.error('Logout error:', error);
+                showStatus('حدث خطأ أثناء تسجيل الخروج', 'error');
+            });
     });
+
+    function handlePasswordChangeError(error) {
+        let errorMessage = 'حدث خطأ غير متوقع';
+
+        switch (error.code) {
+            case 'auth/wrong-password':
+                errorMessage = 'كلمة المرور الحالية غير صحيحة';
+                break;
+            case 'auth/weak-password':
+                errorMessage = 'كلمة المرور الجديدة ضعيفة جداً';
+                break;
+            case 'auth/requires-recent-login':
+                errorMessage = 'يجب تسجيل الدخول حديثاً لإجراء هذا التغيير';
+                break;
+            case 'auth/too-many-requests':
+                errorMessage = 'محاولات كثيرة جداً، الرجاء المحاولة لاحقاً';
+                break;
+            default:
+                console.error('Password change error:', error);
+        }
+
+        showStatus(errorMessage, 'error');
+        document.getElementById('current-password').value = '';
+        document.getElementById('current-password').focus();
+    }
 
     function showStatus(message, type) {
         statusMessage.textContent = message;
