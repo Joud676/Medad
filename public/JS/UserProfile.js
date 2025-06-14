@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            profileName.textContent = user.fullName || 'مستخدم بدون اسم';
+            profileName.textContent = 'جاري التحميل...';
             profileEmail.textContent = user.email;
 
             if (user.uid) {
@@ -17,7 +17,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     .then(doc => {
                         if (doc.exists && doc.data().fullName) {
                             profileName.textContent = doc.data().fullName;
+                        } else {
+                            return firebase.firestore().collection('Readers').doc(user.uid).get();
                         }
+                    })
+                    .then(doc => {
+                        if (doc?.exists && doc.data().fullName) {
+                            profileName.textContent = doc.data().fullName;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching profile name:', error);
+                        profileName.textContent = 'مستخدم';
                     });
             }
         } else {
