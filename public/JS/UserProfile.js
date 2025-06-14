@@ -9,29 +9,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            loadUserProfile(user);
+            profileName.textContent = user.displayName || 'مستخدم بدون اسم';
+            profileEmail.textContent = user.email;
+
+            if (user.uid) {
+                firebase.firestore().collection('Authors').doc(user.uid).get()
+                    .then(doc => {
+                        if (doc.exists && doc.data().fullName) {
+                            profileName.textContent = doc.data().fullName;
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
         } else {
             window.location.href = '/index.html';
         }
     });
-
-    function loadUserProfile(user) {
-        profileName.textContent = user.displayName || 'مستخدم بدون اسم';
-        profileEmail.textContent = user.email;
-
-        if (user.uid) {
-            const db = firebase.firestore();
-            db.collection('Authors').doc(user.uid).get()
-                .then(doc => {
-                    if (doc.exists && doc.data().fullName) {
-                        profileName.textContent = doc.data().fullName;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error loading user data:', error);
-                });
-        }
-    }
 
     showPasswordFormBtn.addEventListener('click', function () {
         changePasswordForm.classList.remove('hidden');
@@ -81,42 +76,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 changePasswordForm.classList.add('hidden');
                 showPasswordFormBtn.classList.remove('hidden');
             })
-            .catch(handlePasswordChangeError);
+            .catch(error => {
+                let errorMessage = 'حدث خطأ أثناء تغيير كلمة المرور';
+
+                if (error.code === 'auth/wrong-password') {
+                    errorMessage = 'كلمة المرور الحالية غير صحيحة';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'كلمة المرور الجديدة ضعيفة جداً';
+                } else if (error.code === 'auth/requires-recent-login') {
+                    errorMessage = 'يجب تسجيل الدخول حديثاً';
+                }
+
+                showStatus(errorMessage, 'error');
+                document.getElementById('current-password').value = '';
+                document.getElementById('current-password').focus();
+            });
     });
 
     logoutBtn.addEventListener('click', function () {
         firebase.auth().signOut()
             .then(() => window.location.href = '/index.html')
             .catch(error => {
-                console.error('Logout error:', error);
                 showStatus('حدث خطأ أثناء تسجيل الخروج', 'error');
             });
     });
-
-    function handlePasswordChangeError(error) {
-        let errorMessage = 'حدث خطأ غير متوقع';
-
-        switch (error.code) {
-            case 'auth/wrong-password':
-                errorMessage = 'كلمة المرور الحالية غير صحيحة';
-                break;
-            case 'auth/weak-password':
-                errorMessage = 'كلمة المرور الجديدة ضعيفة جداً';
-                break;
-            case 'auth/requires-recent-login':
-                errorMessage = 'يجب تسجيل الدخول حديثاً لإجراء هذا التغيير';
-                break;
-            case 'auth/too-many-requests':
-                errorMessage = 'محاولات كثيرة جداً، الرجاء المحاولة لاحقاً';
-                break;
-            default:
-                console.error('Password change error:', error);
-        }
-
-        showStatus(errorMessage, 'error');
-        document.getElementById('current-password').value = '';
-        document.getElementById('current-password').focus();
-    }
 
     function showStatus(message, type) {
         statusMessage.textContent = message;
