@@ -92,62 +92,63 @@ function createAuthorBookCard(book, bookId, bookTitle) {
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "حذف";
-  deleteButton.onclick = () => {
+  deleteButton.onclick = async () => {
     if (confirm("هل أنت متأكد أنك تريد حذف هذا الكتاب؟")) {
-      const userId = firebase.auth().currentUser.uid;
-      const bookRef = db.collection("Books").doc(bookId);
-      const chaptersRef = bookRef.collection("chapters");
+      try {
+        const userId = firebase.auth().currentUser.uid;
+        const bookRef = db.collection("Books").doc(bookId);
 
+        const bookDoc = await bookRef.get();
+        if (!bookDoc.exists || bookDoc.data().authorId !== userId) {
+          alert("ليس لديك صلاحية لحذف هذا الكتاب");
+          return;
+        }
 
-      chaptersRef.get()
-        .then((snapshot) => {
-          const batch = db.batch();
-          snapshot.forEach((doc) => {
-            batch.delete(doc.ref);
-          });
-          return batch.commit();
-        })
-        .then(() => {
-          return bookRef.delete();
-        })
-        .then(() => {
-          const authorRef = db.collection("Authors").doc(userId);
-          return authorRef.update({
-            myBooks: firebase.firestore.FieldValue.arrayRemove({ bookId: bookId, title: bookTitle })
-          });
-        })
-        .then(async () => {
-          const readerSnapshot = await db.collection("Readers").get();
-          const batch = db.batch();
+        const chaptersRef = bookRef.collection("chapters");
+        const chaptersSnapshot = await chaptersRef.get();
 
-          readerSnapshot.forEach((doc) => {
-            const readerRef = doc.ref;
-            const data = doc.data();
-            const favorites = data.favoriteBooks || [];
-
-            if (favorites.includes(bookId)) {
-              batch.update(readerRef, {
-                favoriteBooks: firebase.firestore.FieldValue.arrayRemove(bookId)
-              });
-            }
-          });
-
-          return batch.commit();
-        })
-        .then(() => {
-          alert("تم حذف الكتاب وجميع فصوله بنجاح.");
-          card.remove();
-
-          const authorLibraryContainer = document.querySelector(".library-grid");
-          if (!authorLibraryContainer.querySelector(".book-card")) {
-            showNoBooks(authorLibraryContainer);
-          }
-        })
-
-        .catch((error) => {
-          console.error("❌ خطأ أثناء الحذف الكامل:", error);
-          alert("حدث خطأ أثناء حذف الكتاب أو الفصول. حاول لاحقاً.");
+        const batch = db.batch();
+        chaptersSnapshot.forEach(doc => {
+          batch.delete(doc.ref);
         });
+        await batch.commit();
+
+        await bookRef.delete();
+
+        const authorRef = db.collection("Authors").doc(userId);
+        await authorRef.update({
+          myBooks: firebase.firestore.FieldValue.arrayRemove({
+            bookId: bookId,
+            title: bookTitle
+          })
+        });
+
+        const readersSnapshot = await db.collection("Readers").get();
+        const updateBatch = db.batch();
+
+        readersSnapshot.forEach(doc => {
+          const readerRef = doc.ref;
+          const favorites = doc.data().favoriteBooks || [];
+          if (favorites.includes(bookId)) {
+            updateBatch.update(readerRef, {
+              favoriteBooks: firebase.firestore.FieldValue.arrayRemove(bookId)
+            });
+          }
+        });
+
+        await updateBatch.commit();
+
+        alert("تم حذف الكتاب وجميع فصوله بنجاح.");
+        card.remove();
+
+        const authorLibraryContainer = document.querySelector(".library-grid");
+        if (!authorLibraryContainer.querySelector(".book-card")) {
+          showNoBooks(authorLibraryContainer);
+        }
+      } catch (error) {
+        console.error("❌ خطأ أثناء الحذف الكامل:", error);
+        alert("حدث خطأ أثناء حذف الكتاب. حاول لاحقاً.");
+      }
     }
   };
 
