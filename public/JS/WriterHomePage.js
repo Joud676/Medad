@@ -5,9 +5,9 @@ firebase.auth().onAuthStateChanged((user) => {
     loadAuthorBooks(userId);
   }
 });
+const authorLibraryContainer = document.querySelector(".library-grid");
 
 function loadAuthorBooks(userId) {
-  const authorLibraryContainer = document.querySelector(".library-grid");
 
   db.collection("Authors")
     .doc(userId)
