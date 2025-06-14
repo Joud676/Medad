@@ -355,8 +355,9 @@ async function deleteChapter(chapterId) {
     console.error('❌ خطأ أثناء حذف الفصل:', error);
   }
 }
+
 function HomePageRedirect() {
-  firebase.auth().onAuthStateChanged(function (user) {
+  firebase.auth().onAuthStateChanged((user) => {
     if (!user) {
       window.location.href = '/index.html';
       return;
