@@ -142,9 +142,11 @@ function HomePageRedirect() {
 
             if (authorDoc.exists && !readerDoc.exists) {
                 console.log("🔁 Redirecting to Writer");
+                debugger;
                 window.location.href = '/HTML/WriterHomePage.html';
             } else if (!authorDoc.exists && readerDoc.exists) {
                 console.log("🔁 Redirecting to Reader");
+                debugger;
                 window.location.href = '/HTML/ReaderHomePage.html';
             } else if (authorDoc.exists && readerDoc.exists) {
                 console.log("⚠ User exists in both Authors and Readers");
