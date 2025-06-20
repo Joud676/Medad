@@ -60,6 +60,15 @@
                         <div class="page-toolbar">
                             <button type="button" id="increaseRight" title="تكبير الخط">+</button>
                             <button type="button" id="decreaseRight" title="تصغير الخط">-</button>
+                            <button id="readAloudBtn" onclick="speakText(rightPageContent.innerText)">
+                                <i class="fas fa-volume-up"></i> قراءة الصفحة
+                            </button>
+                            <button onclick="window.speechSynthesis.pause()" title="إيقاف مؤقت">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button onclick="window.speechSynthesis.resume()" title="استئناف">
+                                <i class="fas fa-play"></i>
+                            </button>
                         </div>
                         <div id="rightPageContent" class="page-content">جاري التحميل...</div>
                     </div>
@@ -68,9 +77,14 @@
                         <div class="page-toolbar">
                             <button type="button" id="increaseLeft" title="تكبير الخط">+</button>
                             <button type="button" id="decreaseLeft" title="تصغير الخط">-</button>
-                            <button id="readAloudBtn"
-                                onclick="speakText(rightPageContent.innerText + ' ' + leftPageContent.innerText)">
+                            <button id="readAloudBtn" onclick="speakText(leftPageContent.innerText)">
                                 <i class="fas fa-volume-up"></i> قراءة الصفحة
+                            </button>
+                            <button onclick="window.speechSynthesis.pause()" title="إيقاف مؤقت">
+                                <i class="fas fa-pause"></i>
+                            </button>
+                            <button onclick="window.speechSynthesis.resume()" title="استئناف">
+                                <i class="fas fa-play"></i>
                             </button>
                         </div>
 
