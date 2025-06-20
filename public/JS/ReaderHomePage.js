@@ -101,26 +101,21 @@ function createBookCard(book, bookId, showDeleteButton = false) {
     deleteBtn.title = "إزالة من مكتبتي";
 
     deleteBtn.onclick = async (e) => {
-      e.stopPropagation(); // prevent opening book
+      e.stopPropagation();
       try {
         const user = firebase.auth().currentUser;
         if (user) {
-          const readerSnapshot = await db.collection("Readers").where("uid", "==", user.uid).get();
-          if (!readerSnapshot.empty) {
-            const readerRef = readerSnapshot.docs[0].ref;
+          const confirmed = confirm(`هل أنت متأكد أنك تريد إزالة "${book.title}" من مكتبتك؟`);
+          if (!confirmed) return;
 
-            const confirmed = confirm(`هل أنت متأكد أنك تريد إزالة "${book.title}" من مكتبتك؟`);
-            if (!confirmed) return;
+          await db.collection("Readers").doc(user.uid).update({
+            favoriteBooks: firebase.firestore.FieldValue.arrayRemove(bookId)
+          });
+          card.remove();
 
-            await readerRef.update({
-              favoriteBooks: firebase.firestore.FieldValue.arrayRemove(bookId)
-            });
-            card.remove(); // remove from UI
-
-            const userLibraryContainer = document.querySelector("#user-library .book-list");
-            if (userLibraryContainer && userLibraryContainer.children.length === 0) {
-              showStatus("مكتبتك فارغة، أضف بعض الكتب!", true, "#user-library .book-list");
-            }
+          const userLibraryContainer = document.querySelector("#user-library .book-list");
+          if (userLibraryContainer && userLibraryContainer.children.length === 0) {
+            showStatus("مكتبتك فارغة، أضف بعض الكتب!", true, "#user-library .book-list");
           }
         }
       } catch (error) {
@@ -148,14 +143,13 @@ function loadUserLibrary(userId) {
   db.collection("Readers")
     .doc(userId)
     .get()
-    .then((snapshot) => {
-      if (snapshot.empty) {
+    .then((doc) => {
+      if (!doc.exists) {
         showStatus("لم يتم العثور على بيانات المستخدم", true, "#user-library .book-list");
         return;
       }
 
-      const readerDoc = snapshot.docs[0];
-      const favoriteBooks = readerDoc.data().favoriteBooks || [];
+      const favoriteBooks = doc.data().favoriteBooks || [];
 
       if (favoriteBooks.length === 0) {
         showStatus("مكتبتك فارغة، أضف بعض الكتب!", true, "#user-library .book-list");
