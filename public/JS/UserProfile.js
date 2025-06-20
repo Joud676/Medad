@@ -162,15 +162,20 @@ function HomePageRedirect() {
                 db.collection("Readers").doc(uid).get()
             ]);
 
+            console.log("✅ UID:", uid);
+            console.log("🟣 authorDoc.exists:", authorDoc.exists);
+            console.log("🔵 readerDoc.exists:", readerDoc.exists);
+
             if (authorDoc.exists && !readerDoc.exists) {
                 window.location.href = '/HTML/WriterHomePage.html';
             } else if (!authorDoc.exists && readerDoc.exists) {
                 window.location.href = '/HTML/ReaderHomePage.html';
             } else if (authorDoc.exists && readerDoc.exists) {
-                alert("⚠ الحساب مسجل كقارئ وككاتب! يرجى التواصل مع الدعم.");
+                alert("⚠ المستخدم موجود ككاتب وقارئ. يرجى التواصل مع الدعم.");
             } else {
                 alert("⚠ لم يتم العثور على بيانات المستخدم.");
             }
+
         } catch (error) {
             console.error("🚨 خطأ في التحقق:", error);
             alert("حدث خطأ أثناء التوجيه، يرجى المحاولة لاحقًا.");
