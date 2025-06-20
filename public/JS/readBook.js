@@ -16,7 +16,6 @@ let currentFontIndexLeft = 1;
 let currentFontIndexRight = 1;
 
 window.onload = async function () {
-    // ✅ Get DOM elements AFTER the page loads
     rightPageContent = document.getElementById('rightPageContent');
     leftPageContent = document.getElementById('leftPageContent');
     prevBtn = document.getElementById('prevBtn');
@@ -61,32 +60,22 @@ window.onload = async function () {
     if (addToLibraryBtn) {
         addToLibraryBtn.addEventListener('click', async () => {
             try {
-                window.auth?.onAuthStateChanged(async (user) => {
-                    if (user) {
-                        const uid = user.uid;
+                const user = auth.currentUser;
+                if (!user) {
+                    alert('⚠️ يجب تسجيل الدخول لإضافة الكتاب.');
+                    return;
+                }
 
-                        const readerSnapshot = await window.db.collection('Readers').where('uid', '==', uid).get();
+                const readerRef = db.collection("Readers").doc(user.uid);
 
-                        if (!readerSnapshot.empty) {
-                            const readerDoc = readerSnapshot.docs[0];
-                            const readerRef = readerDoc.ref;
+                await readerRef.set({
+                    favoriteBooks: firebase.firestore.FieldValue.arrayUnion(currentBookId)
+                }, { merge: true });
 
-                            await readerRef.set({
-                                favoriteBooks: firebase.firestore.FieldValue.arrayUnion(currentBookId)
-                            }, { merge: true });
-
-                            alert('✅ تم إضافة الكتاب إلى المفضلة!');
-                        } else {
-                            alert('⚠️ لم يتم العثور على حساب القارئ في قاعدة البيانات.');
-                        }
-
-                    } else {
-                        alert('⚠️ يجب تسجيل الدخول لإضافة الكتاب.');
-                    }
-                });
+                alert('✅ تم إضافة الكتاب إلى المفضلة!');
             } catch (error) {
-                console.error("❌ خطأ أثناء الإضافة إلى المفضلة:", error);
-                alert("حدث خطأ أثناء الإضافة. حاول مرة أخرى.");
+                console.error("❌ خطأ أثناء الإضافة:", error);
+                alert(`حدث خطأ: ${error.message}`);
             }
         });
     }
