@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let query = db.collection("Books");
 
     if (searchText) {
-      query = query.where("title", "==", searchText);
+      query = query.orderBy("title").startAt(searchText).endAt(searchText + '\uf8ff');
     }
 
     if (categoryValue) {
