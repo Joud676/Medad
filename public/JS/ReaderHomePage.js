@@ -146,7 +146,7 @@ function loadUserLibrary(userId) {
   const userLibraryContainer = document.querySelector("#user-library .book-list");
 
   db.collection("Readers")
-    .where("uid", "==", userId)
+    .doc(userId)
     .get()
     .then((snapshot) => {
       if (snapshot.empty) {
