@@ -120,44 +120,62 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+    const homeLink = document.getElementById("homeLink");
+    if (homeLink) {
+        homeLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            HomePageRedirect();
+        });
+    }
+});
+
 function HomePageRedirect() {
+    const loadingMessage = document.createElement("div");
+    loadingMessage.textContent = "🔄 جاري التوجيه...";
+    loadingMessage.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #fefefe;
+    color: #333;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    z-index: 9999;
+  `;
+    document.body.appendChild(loadingMessage);
+
     firebase.auth().onAuthStateChanged(async (user) => {
         if (!user) {
             window.location.href = '/index.html';
             return;
         }
 
-        const db = firebase.firestore();
         const uid = user.uid;
-        console.log("✅ UID:", uid);
+        const db = firebase.firestore();
 
         try {
             const [authorDoc, readerDoc] = await Promise.all([
-                db.collection('Authors').doc(uid).get(),
-                db.collection('Readers').doc(uid).get()
+                db.collection("Authors").doc(uid).get(),
+                db.collection("Readers").doc(uid).get()
             ]);
 
-            console.log("🟣 authorDoc.exists:", authorDoc.exists);
-            console.log("🔵 readerDoc.exists:", readerDoc.exists);
-
             if (authorDoc.exists && !readerDoc.exists) {
-                console.log("🔁 Redirecting to Writer");
-                debugger;
                 window.location.href = '/HTML/WriterHomePage.html';
             } else if (!authorDoc.exists && readerDoc.exists) {
-                console.log("🔁 Redirecting to Reader");
-                debugger;
                 window.location.href = '/HTML/ReaderHomePage.html';
             } else if (authorDoc.exists && readerDoc.exists) {
-                console.log("⚠ User exists in both Authors and Readers");
-                alert("⚠ المستخدم موجود ككاتب وقارئ. يرجى التواصل مع الدعم.");
+                alert("⚠ الحساب مسجل كقارئ وككاتب! يرجى التواصل مع الدعم.");
             } else {
-                console.log("⚠ User exists in neither collection.");
-                alert("⚠ لم يتم العثور على المستخدم.");
+                alert("⚠ لم يتم العثور على بيانات المستخدم.");
             }
-
         } catch (error) {
-            console.error('🔥 Error checking user role:', error);
+            console.error("🚨 خطأ في التحقق:", error);
+            alert("حدث خطأ أثناء التوجيه، يرجى المحاولة لاحقًا.");
+        } finally {
+            loadingMessage.remove();
         }
     });
 }

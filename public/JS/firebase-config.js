@@ -23,5 +23,4 @@ if (typeof firebase === 'undefined') {
     console.error('Authentication service not available.');
   }
 
-  console.log('Firebase initialized successfully');
 }
