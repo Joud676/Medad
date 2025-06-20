@@ -30,7 +30,7 @@ document.getElementById('readerSignupForm').addEventListener('submit', function 
         .then(() => {
             const user = auth.currentUser;
 
-            return setDoc(doc(db, "Readers", user.uid), {
+            return db.collection("Readers").doc(user.uid).set({
                 uid: user.uid,
                 fullName: fullName,
                 email: email,
