@@ -120,67 +120,34 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-    const homeLink = document.getElementById("homeLink");
-    if (homeLink) {
-        homeLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            HomePageRedirect();
-        });
-    }
-});
-
 function HomePageRedirect() {
-    const loadingMessage = document.createElement("div");
-    loadingMessage.textContent = "🔄 جاري التوجيه...";
-    loadingMessage.style.cssText = `
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #fefefe;
-    color: #333;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    z-index: 9999;
-  `;
-    document.body.appendChild(loadingMessage);
-
-    firebase.auth().onAuthStateChanged(async (user) => {
+    firebase.auth().onAuthStateChanged(async function (user) {
         if (!user) {
             window.location.href = '/index.html';
             return;
         }
 
-        const uid = user.uid;
         const db = firebase.firestore();
+        const uid = user.uid;
 
         try {
             const [authorDoc, readerDoc] = await Promise.all([
-                db.collection("Authors").doc(uid).get(),
-                db.collection("Readers").doc(uid).get()
+                db.collection('Authors').doc(uid).get(),
+                db.collection('Readers').doc(uid).get()
             ]);
-
-            console.log("✅ UID:", uid);
-            console.log("🟣 authorDoc.exists:", authorDoc.exists);
-            console.log("🔵 readerDoc.exists:", readerDoc.exists);
 
             if (authorDoc.exists && !readerDoc.exists) {
                 window.location.href = '/HTML/WriterHomePage.html';
             } else if (!authorDoc.exists && readerDoc.exists) {
                 window.location.href = '/HTML/ReaderHomePage.html';
             } else if (authorDoc.exists && readerDoc.exists) {
-                alert("⚠ المستخدم موجود ككاتب وقارئ. يرجى التواصل مع الدعم.");
+                alert("⚠ يوجد خلل في الحساب: المستخدم موجود ككاتب وقارئ. الرجاء مراجعة الدعم.");
             } else {
-                alert("⚠ لم يتم العثور على بيانات المستخدم.");
+                alert("⚠ لم يتم العثور على حسابك ضمن الكتّاب أو القراء.");
             }
 
         } catch (error) {
-            console.error("🚨 خطأ في التحقق:", error);
-            alert("حدث خطأ أثناء التوجيه، يرجى المحاولة لاحقًا.");
-        } finally {
-            loadingMessage.remove();
+            console.error('Error getting user role:', error);
         }
     });
 }

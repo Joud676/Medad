@@ -23,10 +23,26 @@ document.getElementById('readerLoginForm').addEventListener('submit', function (
 
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      showStatus('تم تسجيل الدخول بنجاح! جاري التوجيه...');
-      setTimeout(() => {
-        window.location.href = "/HTML/ReaderHomePage.html";
-      }, 2000);
+      const uid = userCredential.user.uid;
+      const db = firebase.firestore();
+
+      db.collection('Readers').doc(uid).get()
+        .then((doc) => {
+          if (doc.exists) {
+            showStatus('✅ تم تسجيل الدخول كقارئ! جاري التوجيه...');
+            setTimeout(() => {
+              window.location.href = "/HTML/ReaderHomePage.html";
+            }, 1500);
+          } else {
+            showStatus("⚠ هذا الحساب غير مسجل كقارئ", true);
+            auth.signOut();
+          }
+        })
+        .catch((err) => {
+          console.error("Firestore error:", err);
+          showStatus("حدث خطأ أثناء التحقق من الحساب", true);
+        });
+
     })
     .catch((error) => {
       const errorCode = error.code;

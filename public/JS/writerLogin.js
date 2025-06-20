@@ -12,21 +12,30 @@ function showStatus(message, isError = false) {
     }
 }
 
-document.getElementById('writerLoginForm').addEventListener('submit', async function (e) {
+document.getElementById('writerLoginForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-
     showStatus('جاري تسجيل الدخول...');
 
     auth.signInWithEmailAndPassword(email, password)
-        .then(() => {
-            showStatus('✅ تم تسجيل الدخول بنجاح! جاري التوجيه...');
-            setTimeout(() => {
-                window.location.href = "/HTML/WriterHomePage.html";
-            }, 2000);
+        .then((userCredential) => {
+            const uid = userCredential.user.uid;
+            const db = firebase.firestore();
+
+            return db.collection("Authors").doc(uid).get().then((doc) => {
+                if (doc.exists) {
+                    showStatus('✅ تم تسجيل الدخول ككاتب! جاري التوجيه...');
+                    setTimeout(() => {
+                        window.location.href = "/HTML/WriterHomePage.html";
+                    }, 1500);
+                } else {
+                    showStatus("⚠ هذا الحساب غير مسجل ككاتب", true);
+                    auth.signOut();
+                }
+            });
         })
         .catch((error) => {
             const errorCode = error.code;

@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function HomePageRedirect() {
-    firebase.auth().onAuthStateChanged(async (user) => {
+    firebase.auth().onAuthStateChanged(async function (user) {
         if (!user) {
             window.location.href = '/index.html';
             return;
