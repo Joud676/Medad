@@ -234,22 +234,36 @@ function HomePageRedirect() {
         }
     });
 }
+function getLangFromFranc(text) {
+    const langCode = franc(text);
+    const langMap = {
+        'arb': 'ar-SA',
+        'eng': 'en-US',
+        'fra': 'fr-FR',
+        'spa': 'es-ES',
+    };
+
+    return langMap[langCode] || 'ar-SA';
+}
+
 function speakText(text) {
     if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
 
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'ar-SA';
-        utterance.rate = 0.9;
+        const detectedLang = getLangFromFranc(text);
+        utterance.lang = detectedLang;
 
         const voices = window.speechSynthesis.getVoices();
-        const arabicVoice = voices.find(voice => voice.lang.startsWith('ar'));
-        if (arabicVoice) {
-            utterance.voice = arabicVoice;
+        const matchedVoice = voices.find(voice => voice.lang === detectedLang);
+        if (matchedVoice) {
+            utterance.voice = matchedVoice;
         }
 
+        utterance.rate = 0.9;
         window.speechSynthesis.speak(utterance);
     } else {
         alert('❌ المتصفح لا يدعم ميزة قراءة النصوص');
     }
 }
+
