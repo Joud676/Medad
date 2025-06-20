@@ -68,6 +68,10 @@
                         <div class="page-toolbar">
                             <button type="button" id="increaseLeft" title="تكبير الخط">+</button>
                             <button type="button" id="decreaseLeft" title="تصغير الخط">-</button>
+                            <button id="readAloudBtn"
+                                onclick="speakText(rightPageContent.innerText + ' ' + leftPageContent.innerText)">
+                                <i class="fas fa-volume-up"></i> قراءة الصفحة
+                            </button>
                         </div>
 
                         <div id="leftPageContent" class="page-content"></div>

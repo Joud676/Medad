@@ -234,3 +234,13 @@ function HomePageRedirect() {
         }
     });
 }
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ar-SA';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert('عفواً، هذه الميزة غير مدعومة في متصفحك');
+    }
+}
