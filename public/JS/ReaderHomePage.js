@@ -68,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       const userId = user.uid;
-      console.log("Logged in user ID:", userId);
       loadUserLibrary(userId);
       loadGeneralLibrary();
     }

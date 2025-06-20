@@ -41,7 +41,7 @@ document.getElementById('readerSignupForm').addEventListener('submit', function 
         .then(() => {
             showStatus("تم إنشاء الحساب بنجاح! جاري التوجيه...");
             setTimeout(() => {
-                window.location.href = "/ReaderHomePage.html";
+                window.location.href = "/HTML/ReaderHomePage.html";
             }, 2000);
         })
         .catch((error) => {
