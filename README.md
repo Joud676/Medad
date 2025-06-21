@@ -31,7 +31,7 @@ Experience the platform: https://medad-olive.vercel.app/
 |-----------------|----------------------------------|
 | Frontend        | HTML5, CSS3, JavaScript           |
 | Backend         | Firebase (Auth, Firestore)        |
-| APIs            | ImgBB (images), Web Speech        |
+| APIs            | ImgBB (images hosting), Web Speech API       |
 | Deployment      | Vercel                           |
 
 ---
