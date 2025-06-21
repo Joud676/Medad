@@ -1,5 +1,55 @@
-**Medad Website**
+# 📚 Medad - Arabic Digital Publishing Platform  
 
-A platform designed to inspire creativity and support aspiring authors. It allows users to register as Writers or Readers. Writers can bring their stories to life by selecting a cover image, writing content in an e-book format, choosing a genre, and publishing their work to reach a broad audience. In the future, Medad plans to integrate an AI model to help writers improve their skills by checking for spelling and grammar errors. 
+**Medad** is a platform designed to inspire creativity and support aspiring authors, connecting passionate readers with emerging writers in a vibrant literary community that celebrates Arabic storytelling.
 
-Readers can explore a diverse library, sort books by genre, and choose to read them like e-books or listen using a text-to-speech API. By connecting passionate readers and emerging writers, Medad builds a vibrant literary community that celebrates storytelling.
+---
+
+## 🎯 Live Demo  
+Experience the platform:   
+
+---
+
+## ✨ Platform Highlights  
+
+### For Writers ✍️  
+- 🖋️ **Bring stories to life**: Write and publish in beautiful e-book format  
+- 🎨 **Customizable covers**: Select images and colors for your book  
+- 📚 **Genre selection**: Categorize your work for better discovery  
+- 🔜 **Coming soon**: AI-powered writing assistant for grammar and spelling  
+
+### For Readers 📖  
+- 🔍 **Discover diverse content**: Browse by genre, year, or popularity  
+- 📖 **Flexible reading**: Choose between visual reading or audio narration  
+- ❤️ **Personal library**: Save your favorite books for later  
+- 🎧 **Text-to-speech**: Listen to books using our Arabic TTS API  
+
+---
+
+## 🛠 Technology Stack  
+
+| Component       | Technology                         |
+|-----------------|----------------------------------|
+| Frontend        | HTML5, CSS3, JavaScript           |
+| Backend         | Firebase (Auth, Firestore)        |
+| APIs            | ImgBB (images), Web Speech        |
+| Deployment      | Vercel                           |
+
+---
+
+## 🌟 Our Vision  
+Medad bridges the gap between Arabic writers and readers by:  
+- Providing writers with professional publishing tools  
+- Offering readers high-quality Arabic content  
+- Building a supportive literary community  
+- Future plans include AI-assisted writing improvements  
+
+---
+
+## ⚠️ Development Notes  
+The project uses absolute paths optimized for Vercel. For local testing:  
+```bash
+# Best option - matches production:
+vercel dev
+
+# Alternative (requires path adjustments):
+# Change /path/ to ./path/ in all files
