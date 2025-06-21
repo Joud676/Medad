@@ -54,8 +54,7 @@ Install Vercel CLI and run a local server that perfectly simulates production:
 ```bash
 npm install -g vercel
 vercel dev
-
----
+```
 
 # Alternative (requires path adjustments):
 # Change /path/ to ./path/ in all files
