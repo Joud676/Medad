@@ -57,4 +57,4 @@ vercel dev
 ```
 
 # Alternative (requires path adjustments):
-# Change /path/ to ./path/ in all files
+Change /path/ to ./path/ in all files
