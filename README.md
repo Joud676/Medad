@@ -5,7 +5,7 @@
 ---
 
 ## 🎯 Live Demo  
-Experience the platform:   
+Experience the platform: https://medad-olive.vercel.app/ 
 
 ---
 
@@ -15,8 +15,8 @@ Experience the platform:
 - 🖋️ **Bring stories to life**: Write and publish in beautiful e-book format  
 - 🎨 **Customizable covers**: Select images and colors for your book  
 - 📚 **Genre selection**: Categorize your work for better discovery  
-- 🔜 **Coming soon**: AI-powered writing assistant for grammar and spelling  
-
+- 📂 **Chapter management system**: Easily add, delete, and reorganize chapters
+  
 ### For Readers 📖  
 - 🔍 **Discover diverse content**: Browse by genre, year, or popularity  
 - 📖 **Flexible reading**: Choose between visual reading or audio narration  
