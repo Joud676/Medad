@@ -1,3 +1,4 @@
 # Ignore generated Firebase config
 public/JS/firebase-config.js
 
+.vercel
