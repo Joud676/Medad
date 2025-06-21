@@ -46,12 +46,14 @@ Medad bridges the gap between Arabic writers and readers by:
 ---
 
 ## ⚠️ Development Notes  
-The project uses absolute paths optimized for Vercel. For local testing:  
+The project uses absolute paths optimized for Vercel. For local testing:
+
+# Best option - matches production:
+Install Vercel CLI and run a local server that perfectly simulates production:
+
 ```bash
-### Best option - matches production:
-Install Vercel CLI and run a local server that perfectly simulates production  
-   npm install -g vercel
-   vercel dev
+npm install -g vercel
+vercel dev
 
 
 # Alternative (requires path adjustments):
