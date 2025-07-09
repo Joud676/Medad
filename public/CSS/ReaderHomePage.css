@@ -426,7 +426,14 @@ button:hover {
 
   .challenge-card p {
     font-size: 1rem;
+    max-width: 100%;
   }
+
+  .challenge-container {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
 
   .intro {
     flex-direction: column;

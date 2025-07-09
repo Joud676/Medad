@@ -417,13 +417,12 @@ button:hover {
 }
 
 
-
-/* Responsive Design */
-
 @media (max-width: 768px) {
 
   .challenge-card {
     padding: 1.5rem;
+    width: 90%;
+    max-width: 400px;
   }
 
   .challenge-card h3 {
@@ -467,6 +466,13 @@ button:hover {
     width: 90%;
     max-width: 350px;
   }
+
+  .challenge-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+
 }
 
 @media (max-width: 576px) {
