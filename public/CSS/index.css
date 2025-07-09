@@ -324,4 +324,16 @@ header {
     .main-buttons {
         justify-content: center;
     }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 0.5rem 20px;
+    }
+
+    .footer-section {
+        margin: 1rem 0;
+        text-align: center;
+    }
 }
