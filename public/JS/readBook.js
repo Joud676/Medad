@@ -262,3 +262,8 @@ function speakText(text) {
         alert('❌ المتصفح لا يدعم ميزة قراءة النصوص');
     }
 }
+
+window.addEventListener('beforeunload', () => {
+    window.speechSynthesis.cancel();
+});
+
