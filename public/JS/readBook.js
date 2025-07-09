@@ -267,3 +267,6 @@ window.addEventListener('beforeunload', () => {
     window.speechSynthesis.cancel();
 });
 
+window.addEventListener('pagehide', () => {
+    window.speechSynthesis.cancel();
+});
