@@ -262,19 +262,30 @@ function speakText(text) {
         return;
     }
 
-    window.speechSynthesis.cancel();
+    const speak = () => {
+        window.speechSynthesis.cancel();
 
-    const cleaned = cleanText(text);
-    const utterance = new SpeechSynthesisUtterance(cleaned);
-    utterance.lang = getLangFromText(cleaned);
+        const cleaned = cleanText(text);
+        const utterance = new SpeechSynthesisUtterance(cleaned);
+        utterance.lang = getLangFromText(cleaned);
 
-    const matchedVoice = availableVoices.find(v =>
-        v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Maged'
-    );
-    if (matchedVoice) utterance.voice = matchedVoice;
+        const matchedVoice = availableVoices.find(v =>
+            v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Maged'
+        );
+        if (matchedVoice) utterance.voice = matchedVoice;
 
-    utterance.rate = 0.85;
-    window.speechSynthesis.speak(utterance);
+        utterance.rate = 0.85;
+        window.speechSynthesis.speak(utterance);
+    };
+
+    if (availableVoices.length === 0) {
+        window.speechSynthesis.onvoiceschanged = () => {
+            availableVoices = window.speechSynthesis.getVoices();
+            speak();
+        };
+        window.speechSynthesis.getVoices();
+        speak();
+    }
 }
 
 
