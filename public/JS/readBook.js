@@ -250,6 +250,11 @@ function getLangFromText(text) {
     }
     return 'en-US';
 }
+let availableVoices = [];
+
+window.speechSynthesis.onvoiceschanged = () => {
+    availableVoices = window.speechSynthesis.getVoices();
+};
 
 function speakText(text) {
     if (!('speechSynthesis' in window)) {
@@ -263,9 +268,7 @@ function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(cleaned);
     utterance.lang = getLangFromText(cleaned);
 
-    const voices = window.speechSynthesis.getVoices();
-
-    const matchedVoice = voices.find(v =>
+    const matchedVoice = availableVoices.find(v =>
         v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Maged'
     );
     if (matchedVoice) utterance.voice = matchedVoice;
@@ -273,6 +276,7 @@ function speakText(text) {
     utterance.rate = 0.85;
     window.speechSynthesis.speak(utterance);
 }
+
 
 
 window.addEventListener('beforeunload', () => {
