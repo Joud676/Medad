@@ -28,8 +28,17 @@ window.onload = async function () {
         return;
     }
 
+    document.getElementById('readRightBtn').addEventListener('click', () => {
+        speakText(rightPageContent.innerText);
+    });
+
+    document.getElementById('readLeftBtn').addEventListener('click', () => {
+        speakText(leftPageContent.innerText);
+    });
+
     await loadBookTitle();
     await loadChapters();
+    await loadVoices();
     attachChapterClickEvents();
     updatePageContent();
 
@@ -252,40 +261,42 @@ function getLangFromText(text) {
 }
 let availableVoices = [];
 
-window.speechSynthesis.onvoiceschanged = () => {
-    availableVoices = window.speechSynthesis.getVoices();
-};
+function loadVoices() {
+    return new Promise((resolve) => {
+        availableVoices = window.speechSynthesis.getVoices();
+        if (availableVoices.length !== 0) {
+            resolve(availableVoices);
+        } else {
+            window.speechSynthesis.onvoiceschanged = () => {
+                availableVoices = window.speechSynthesis.getVoices();
+                resolve(availableVoices);
+            };
+        }
+    });
+}
 
-function speakText(text) {
+async function speakText(text) {
     if (!('speechSynthesis' in window)) {
         alert('❌ المتصفح لا يدعم قراءة النصوص');
         return;
     }
 
-    const speak = () => {
-        window.speechSynthesis.cancel();
+    await loadVoices();
 
-        const cleaned = cleanText(text);
-        const utterance = new SpeechSynthesisUtterance(cleaned);
-        utterance.lang = getLangFromText(cleaned);
+    window.speechSynthesis.cancel();
 
-        const matchedVoice = availableVoices.find(v =>
-            v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Maged'
-        );
-        if (matchedVoice) utterance.voice = matchedVoice;
+    const cleaned = cleanText(text);
+    const utterance = new SpeechSynthesisUtterance(cleaned);
+    utterance.lang = getLangFromText(cleaned);
 
-        utterance.rate = 0.85;
-        window.speechSynthesis.speak(utterance);
-    };
+    const matchedVoice = availableVoices.find(v =>
+        v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Maged'
+    );
+    if (matchedVoice) utterance.voice = matchedVoice;
 
-    if (availableVoices.length === 0) {
-        window.speechSynthesis.onvoiceschanged = () => {
-            availableVoices = window.speechSynthesis.getVoices();
-            speak();
-        };
-        window.speechSynthesis.getVoices();
-        speak();
-    }
+    utterance.rate = 0.85;
+    window.speechSynthesis.speak(utterance);
+
 }
 
 
