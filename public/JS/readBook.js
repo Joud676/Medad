@@ -235,6 +235,14 @@ function HomePageRedirect() {
     });
 }
 
+
+function cleanText(text) {
+    return text
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()؟،؛]/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+}
+
 function getLangFromText(text) {
     const arabicRegex = /[\u0600-\u06FF]/;
     if (arabicRegex.test(text)) {
@@ -244,24 +252,28 @@ function getLangFromText(text) {
 }
 
 function speakText(text) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = getLangFromText(text);
-
-        const voices = window.speechSynthesis.getVoices();
-        const matchedVoice = voices.find(voice => voice.lang === utterance.lang);
-        if (matchedVoice) {
-            utterance.voice = matchedVoice;
-        }
-
-        utterance.rate = 0.9;
-        window.speechSynthesis.speak(utterance);
-    } else {
-        alert('❌ المتصفح لا يدعم ميزة قراءة النصوص');
+    if (!('speechSynthesis' in window)) {
+        alert('❌ المتصفح لا يدعم قراءة النصوص');
+        return;
     }
+
+    window.speechSynthesis.cancel();
+
+    const cleaned = cleanText(text);
+    const utterance = new SpeechSynthesisUtterance(cleaned);
+    utterance.lang = getLangFromText(cleaned);
+
+    const voices = window.speechSynthesis.getVoices();
+
+    const matchedVoice = voices.find(v =>
+        v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Maged'
+    );
+    if (matchedVoice) utterance.voice = matchedVoice;
+
+    utterance.rate = 0.85;
+    window.speechSynthesis.speak(utterance);
 }
+
 
 window.addEventListener('beforeunload', () => {
     window.speechSynthesis.cancel();
