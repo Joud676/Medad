@@ -15,6 +15,7 @@ let currentFontIndexLeft = 1;
 let currentFontIndexRight = 1;
 
 let availableVoices = [];
+let voicesReady = false;
 
 window.onload = async function () {
     rightPageContent = document.getElementById('rightPageContent');
@@ -29,17 +30,18 @@ window.onload = async function () {
         return;
     }
 
-    document.getElementById('readRightBtn').addEventListener('click', () => {
+    document.getElementById('readRightBtn').addEventListener('click', async () => {
+        if (!voicesReady) await ensureVoicesLoaded();
         setTimeout(() => speakText(rightPageContent.innerText), 0);
     });
 
-    document.getElementById('readLeftBtn').addEventListener('click', () => {
+    document.getElementById('readLeftBtn').addEventListener('click', async () => {
+        if (!voicesReady) await ensureVoicesLoaded();
         setTimeout(() => speakText(leftPageContent.innerText), 0);
     });
 
     await loadBookTitle();
     await loadChapters();
-    await loadVoices();
     attachChapterClickEvents();
     updatePageContent();
 
@@ -260,20 +262,29 @@ function getLangFromText(text) {
     return 'en-US';
 }
 
-function loadVoices() {
-    return new Promise((resolve) => {
+function ensureVoicesLoaded() {
+    return new Promise(resolve => {
         const synth = window.speechSynthesis;
-        let voices = synth.getVoices();
-        if (voices.length) {
-            availableVoices = voices;
-            resolve(voices);
-        } else {
-            synth.onvoiceschanged = () => {
-                voices = synth.getVoices();
+        const load = () => {
+            const voices = synth.getVoices();
+            if (voices.length) {
                 availableVoices = voices;
-                resolve(voices);
-            };
-        }
+                voicesReady = true;
+                resolve();
+            }
+        };
+        synth.onvoiceschanged = () => { load(); synth.onvoiceschanged = null; };
+        load();
+        const poll = setInterval(() => {
+            if (!voicesReady) load();
+            else clearInterval(poll);
+        }, 200);
+        setTimeout(() => {
+            if (!voicesReady) {
+                voicesReady = true;
+                resolve();
+            }
+        }, 2000);
     });
 }
 
@@ -282,8 +293,6 @@ async function speakText(text) {
         alert('❌ المتصفح لا يدعم قراءة النصوص');
         return;
     }
-
-    await loadVoices();
 
     window.speechSynthesis.cancel();
 
