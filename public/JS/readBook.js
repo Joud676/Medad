@@ -1,4 +1,3 @@
-
 let rightPageContent;
 let leftPageContent;
 let prevBtn;
@@ -15,6 +14,8 @@ const fontSizes = ['small', 'medium', 'large'];
 let currentFontIndexLeft = 1;
 let currentFontIndexRight = 1;
 
+let availableVoices = [];
+
 window.onload = async function () {
     rightPageContent = document.getElementById('rightPageContent');
     leftPageContent = document.getElementById('leftPageContent');
@@ -29,11 +30,11 @@ window.onload = async function () {
     }
 
     document.getElementById('readRightBtn').addEventListener('click', () => {
-        speakText(rightPageContent.innerText);
+        setTimeout(() => speakText(rightPageContent.innerText), 0);
     });
 
     document.getElementById('readLeftBtn').addEventListener('click', () => {
-        speakText(leftPageContent.innerText);
+        setTimeout(() => speakText(leftPageContent.innerText), 0);
     });
 
     await loadBookTitle();
@@ -65,6 +66,7 @@ window.onload = async function () {
             }
         };
     }
+
     const addToLibraryBtn = document.getElementById('addToLibraryBtn');
     if (addToLibraryBtn) {
         addToLibraryBtn.addEventListener('click', async () => {
@@ -88,7 +90,6 @@ window.onload = async function () {
             }
         });
     }
-
 };
 
 async function loadBookTitle() {
@@ -244,10 +245,9 @@ function HomePageRedirect() {
     });
 }
 
-
 function cleanText(text) {
     return text
-        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()؟،؛]/g, '')
+        .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()؟،؛]/g, ' ')
         .replace(/\s{2,}/g, ' ')
         .trim();
 }
@@ -259,17 +259,19 @@ function getLangFromText(text) {
     }
     return 'en-US';
 }
-let availableVoices = [];
 
 function loadVoices() {
     return new Promise((resolve) => {
-        availableVoices = window.speechSynthesis.getVoices();
-        if (availableVoices.length !== 0) {
-            resolve(availableVoices);
+        const synth = window.speechSynthesis;
+        let voices = synth.getVoices();
+        if (voices.length) {
+            availableVoices = voices;
+            resolve(voices);
         } else {
-            window.speechSynthesis.onvoiceschanged = () => {
-                availableVoices = window.speechSynthesis.getVoices();
-                resolve(availableVoices);
+            synth.onvoiceschanged = () => {
+                voices = synth.getVoices();
+                availableVoices = voices;
+                resolve(voices);
             };
         }
     });
@@ -295,11 +297,11 @@ async function speakText(text) {
     if (matchedVoice) utterance.voice = matchedVoice;
 
     utterance.rate = 0.85;
-    window.speechSynthesis.speak(utterance);
 
+    setTimeout(() => {
+        window.speechSynthesis.speak(utterance);
+    }, 0);
 }
-
-
 
 window.addEventListener('beforeunload', () => {
     window.speechSynthesis.cancel();
