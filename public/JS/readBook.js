@@ -301,7 +301,7 @@ async function speakText(text) {
     utterance.lang = getLangFromText(cleaned);
 
     const matchedVoice = availableVoices.find(v =>
-        v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Maged'
+        v.lang === utterance.lang || v.name.toLowerCase().includes('arabic') || v.name === 'Majed'
     );
     if (matchedVoice) utterance.voice = matchedVoice;
 
@@ -309,7 +309,7 @@ async function speakText(text) {
 
     setTimeout(() => {
         window.speechSynthesis.speak(utterance);
-    }, 0);
+    }, 200);
 }
 
 window.addEventListener('beforeunload', () => {
